@@ -51,7 +51,10 @@ export function renderOverview() {
     totalZones,
     state.dashboard.totalAreaSqFt
   );
-  const estateStatus = getEstateStatus(readiness, nextEvent, mappedZones);
+  const estateStatus = getEstateStatus(readiness, nextEvent, mappedZones) || {
+    label: "Getting Started",
+    className: "is-starting",
+  };
 
   refs.heroMeta.textContent =
     "Your field guide for mapping the lawn, planning treatments, logging mowing, and keeping the season in motion.";
@@ -161,7 +164,10 @@ export function renderGettingStarted() {
     "The main workspace areas will appear here.",
     "grid_view"
   );
-  const nextAction = getGettingStartedNextAction(outstanding[0]);
+  const nextAction = getGettingStartedNextAction(outstanding[0]) || {
+    target: "overview",
+    label: "Back To Overview",
+  };
   refs.gettingStartedNextStep.textContent =
     outstanding[0]?.nextStep || "Keep logging real lawn work so the system stays current.";
   if (refs.gettingStartedNextAction) {
@@ -178,7 +184,9 @@ export function renderTimeline() {
 
   refs.timelineRangeWeek.classList.toggle("active", state.timeline.range === "week");
   refs.timelineRangeMonth.classList.toggle("active", state.timeline.range === "month");
-  refs.timelineCaption.textContent = `${state.timeline.window.label} • ${state.timeline.summary.total} total event${state.timeline.summary.total === 1 ? "" : "s"}`;
+  const timelineLabel = state.timeline?.window?.label || "Current plan window";
+  const timelineTotal = Number(state.timeline?.summary?.total || 0);
+  refs.timelineCaption.textContent = `${timelineLabel} • ${timelineTotal} total event${timelineTotal === 1 ? "" : "s"}`;
 
   const selectedTimelineDate = resolveSelectedTimelineDate(state.timeline.days);
   const selectedDay = state.timeline.days.find((day) => day.date === selectedTimelineDate) || null;
@@ -912,18 +920,19 @@ function buildWeeklySnapshot(timeline) {
     };
   }
 
-  const activeDays = timeline.days.filter((day) => day.eventCount > 0).length;
-  const { total, treatments, mowing, waterings } = timeline.summary;
+  const activeDays = (timeline.days || []).filter((day) => day.eventCount > 0).length;
+  const { total = 0, treatments = 0, mowing = 0, waterings = 0 } = timeline.summary || {};
+  const timelineLabel = timeline?.window?.label || "This period";
 
   if (total === 0) {
     return {
       title: "This week is still open.",
-      copy: `${timeline.window.label} has no logged mowing or scheduled treatments yet.`,
+      copy: `${timelineLabel} has no logged mowing or scheduled treatments yet.`,
       totalLabel: "0 items this week",
       treatmentLabel: "0 treatments",
       mowingLabel: "0 mowing entries",
       wateringLabel: "0 scheduled waterings",
-      days: timeline.days,
+      days: timeline.days || [],
       items: [],
     };
   }
@@ -933,13 +942,13 @@ function buildWeeklySnapshot(timeline) {
       total === 1
         ? "One lawn action is shaping this week."
         : `${total} lawn actions are shaping this week.`,
-    copy: `${timeline.window.label} carries ${treatments} treatment${treatments === 1 ? "" : "s"}, ${mowing} mowing item${mowing === 1 ? "" : "s"}, and ${waterings} scheduled watering${waterings === 1 ? "" : "s"} across ${activeDays} active day${activeDays === 1 ? "" : "s"}.`,
+    copy: `${timelineLabel} carries ${treatments} treatment${treatments === 1 ? "" : "s"}, ${mowing} mowing item${mowing === 1 ? "" : "s"}, and ${waterings} scheduled watering${waterings === 1 ? "" : "s"} across ${activeDays} active day${activeDays === 1 ? "" : "s"}.`,
     totalLabel: `${total} item${total === 1 ? "" : "s"} this week`,
     treatmentLabel: `${treatments} treatment${treatments === 1 ? "" : "s"}`,
     mowingLabel: `${mowing} mowing item${mowing === 1 ? "" : "s"}`,
     wateringLabel: `${waterings} scheduled watering${waterings === 1 ? "" : "s"}`,
-    days: timeline.days,
-    items: timeline.items.slice(0, 4),
+    days: timeline.days || [],
+    items: (timeline.items || []).slice(0, 4),
   };
 }
 
