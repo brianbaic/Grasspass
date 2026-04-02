@@ -1,10 +1,8 @@
-const http = require("http");
-const { execFileSync } = require("child_process");
+﻿const http = require("http");
 const fsSync = require("fs");
 const fs = require("fs/promises");
 const path = require("path");
 const crypto = require("crypto");
-const Database = require("better-sqlite3");
 const { createBackgroundJobs, setDependencies: setJobsDependencies } = require("./server/jobs");
 const {
   mutateSnapshot,
@@ -64,263 +62,50 @@ const STATIC_FILES = new Map([
   // Note: /app/* paths are served by the module route below.
 ]);
 
-class SQLiteStore {
-  constructor(options) {
-    this.mode = "sqlite";
-    this.rootDir = options.rootDir;
-    this.storageDir =
-      options.storageDir || path.join(options.rootDir, "_private", "runtime");
-    this.dbPath = path.join(this.storageDir, "grasspass.db");
-    this.db = null;
+// In-Memory Store — no native deps, state persists in module scope per Lambda instance
+const _snapshots = new Map();
+
+class MemoryStore {
+  constructor() {
+    this.mode = "memory";
   }
 
   async init() {
-    await fs.mkdir(this.storageDir, { recursive: true });
-
-    try {
-      this.db = new Database(this.dbPath);
-      this.db.pragma("journal_mode = WAL");
-    } catch (error) {
-      throw new Error(`Failed to open SQLite database at ${this.dbPath}: ${error.message}`);
-    }
-
-    const schemaPath = path.join(this.rootDir, "db", "sqlite-schema.sql");
-    const schemaSql = await fs.readFile(schemaPath, "utf8");
-
-    try {
-      this.db.exec(schemaSql);
-    } catch (error) {
-      throw new Error(`Failed to initialize database schema: ${error.message}`);
-    }
-
-    const current = this.db
-      .prepare("SELECT state_key, data FROM grasspass_app_state")
-      .all();
-
-    if (current.length === 0) {
-      await this.writeSnapshot(createDefaultState(this.mode), APP_STATE_KEY);
-      return;
-    }
-
-    for (const row of current) {
-      const subject = stateKeyToSubject(row.state_key);
-      const snapshot = normalizeState(JSON.parse(row.data), { storageMode: this.mode });
-      await this.syncAuthToSQLite(snapshot);
+    if (!_snapshots.has(APP_STATE_KEY)) {
+      _snapshots.set(APP_STATE_KEY, createDefaultState(this.mode));
     }
   }
 
   async readSnapshot(subject = APP_STATE_KEY) {
-    const stateKey = subjectToStateKey(subject);
-    const row = this.db
-      .prepare("SELECT data FROM grasspass_app_state WHERE state_key = ?")
-      .get(stateKey);
-
-    if (!row) {
-      if (subject !== APP_STATE_KEY) {
-        const userCount = this.db
-          .prepare("SELECT COUNT(*) as count FROM grasspass_app_state WHERE state_key LIKE 'user:%'")
-          .get();
-        const primary = this.db
-          .prepare("SELECT data FROM grasspass_app_state WHERE state_key = ?")
-          .get(APP_STATE_KEY);
-
-        if (userCount.count === 0 && primary) {
-          const migrated = normalizeState(JSON.parse(primary.data), { storageMode: this.mode });
-          await this.writeSnapshot(migrated, subject);
-          await this.writeSnapshot(createDefaultState(this.mode), APP_STATE_KEY);
-          return migrated;
-        }
-      }
+    const key = subjectToStateKey(subject);
+    if (!_snapshots.has(key)) {
       const fresh = createDefaultState(this.mode);
-      await this.writeSnapshot(fresh, subject);
+      _snapshots.set(key, fresh);
       return fresh;
     }
-
-    return normalizeState(JSON.parse(row.data), { storageMode: this.mode });
+    return _snapshots.get(key);
   }
 
   async writeSnapshot(snapshot, subject = APP_STATE_KEY) {
-    const stateKey = subjectToStateKey(subject);
+    const key = subjectToStateKey(subject);
     const normalized = normalizeState(snapshot, { storageMode: this.mode });
-    const dataJson = JSON.stringify(normalized);
-
-    this.db
-      .prepare(
-        `INSERT INTO grasspass_app_state (state_key, data, updated_at)
-         VALUES (?, ?, ?)
-         ON CONFLICT(state_key) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at`
-      )
-      .run(stateKey, dataJson, nowIso());
-
-    await this.syncAuthToSQLite(normalized);
+    _snapshots.set(key, normalized);
+    return normalized;
   }
 
-  async recordBackup(metadata) {
-    this.db
-      .prepare(
-        `INSERT OR IGNORE INTO grasspass_backup_runs (id, created_at, metadata)
-         VALUES (?, ?, ?)`
-      )
-      .run(metadata.id, nowIso(), JSON.stringify(metadata));
-  }
+  async recordBackup() {}
 
-  async close() {
-    if (this.db) {
-      this.db.close();
-      this.db = null;
-    }
-  }
+  async close() {}
 
   async listSnapshots() {
-    const rows = this.db
-      .prepare("SELECT state_key, data FROM grasspass_app_state ORDER BY updated_at DESC")
-      .all();
-
-    return rows.map((row) => ({
-      subject: stateKeyToSubject(row.state_key),
-      snapshot: normalizeState(JSON.parse(row.data), { storageMode: this.mode }),
+    return Array.from(_snapshots.entries()).map(([key, snapshot]) => ({
+      subject: stateKeyToSubject(key),
+      snapshot,
     }));
   }
 
   async getDatabaseInsights() {
-    const tables = this.db
-      .prepare(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 'grasspass_%' ORDER BY name"
-      )
-      .all();
-
-    const trackedTables = [
-      "grasspass_users",
-      "grasspass_invites",
-      "grasspass_sessions",
-      "grasspass_backup_runs",
-      "grasspass_app_state",
-    ];
-
-    const userResult = this.db.prepare("SELECT COUNT(*) as count FROM grasspass_users").get();
-    const recordCounts = {};
-
-    for (const tableName of trackedTables) {
-      try {
-        const result = this.db
-          .prepare(`SELECT COUNT(*) as count FROM ${tableName}`)
-          .get();
-        recordCounts[tableName] = result?.count || 0;
-      } catch (error) {
-        recordCounts[tableName] = 0;
-      }
-    }
-
-    const totalRecords = Object.values(recordCounts).reduce(
-      (total, count) => total + Number(count || 0),
-      0
-    );
-
-    return {
-      generatedAt: nowIso(),
-      users: userResult?.count || 0,
-      tables: tables.length,
-      fields: 0,
-      records: totalRecords,
-      recordsByTable: recordCounts,
-    };
-  }
-
-  async syncAuthToSQLite(snapshot) {
-    if (!snapshot || !snapshot.auth) {
-      return;
-    }
-
-    const normalized = normalizeState(snapshot, { storageMode: this.mode });
-    const authState = {
-      users: normalized.auth?.users || [],
-      invites: normalized.auth?.invites || [],
-      sessions: normalized.auth?.sessions || [],
-    };
-
-    const transaction = this.db.transaction(() => {
-      // Delete users not in current set
-      const userIds = authState.users.map((u) => u.id);
-      if (userIds.length > 0) {
-        const placeholders = userIds.map(() => "?").join(",");
-        this.db.prepare(`DELETE FROM grasspass_users WHERE id NOT IN (${placeholders})`).run(...userIds);
-      } else {
-        this.db.prepare("DELETE FROM grasspass_users").run();
-      }
-
-      // Upsert users
-      for (const user of authState.users) {
-        this.db
-          .prepare(
-            `INSERT OR REPLACE INTO grasspass_users
-             (id, email, display_name, role, password_hash, created_at, updated_at, last_login_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-          )
-          .run(
-            user.id,
-            user.email,
-            user.displayName,
-            user.role,
-            user.passwordHash,
-            user.createdAt,
-            user.updatedAt,
-            user.lastLoginAt || null
-          );
-      }
-
-      // Delete invites not in current set
-      const inviteIds = authState.invites.map((i) => i.id);
-      if (inviteIds.length > 0) {
-        const placeholders = inviteIds.map(() => "?").join(",");
-        this.db.prepare(`DELETE FROM grasspass_invites WHERE id NOT IN (${placeholders})`).run(...inviteIds);
-      } else {
-        this.db.prepare("DELETE FROM grasspass_invites").run();
-      }
-
-      // Upsert invites
-      for (const invite of authState.invites) {
-        this.db
-          .prepare(
-            `INSERT OR REPLACE INTO grasspass_invites
-             (id, code, role, note, created_by_user_id, created_at, used_at, used_by_user_id)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-          )
-          .run(
-            invite.id,
-            invite.code,
-            invite.role,
-            invite.note || null,
-            invite.createdByUserId || null,
-            invite.createdAt,
-            invite.usedAt || null,
-            invite.usedByUserId || null
-          );
-      }
-
-      // Delete sessions not in current set
-      const sessionIds = authState.sessions.map((s) => s.id);
-      if (sessionIds.length > 0) {
-        const placeholders = sessionIds.map(() => "?").join(",");
-        this.db
-          .prepare(`DELETE FROM grasspass_sessions WHERE id NOT IN (${placeholders})`)
-          .run(...sessionIds);
-      } else {
-        this.db.prepare("DELETE FROM grasspass_sessions").run();
-      }
-
-      // Upsert sessions
-      for (const session of authState.sessions) {
-        this.db
-          .prepare(
-            `INSERT OR REPLACE INTO grasspass_sessions
-             (id, user_id, created_at, expires_at)
-             VALUES (?, ?, ?, ?)`
-          )
-          .run(session.id, session.userId, session.createdAt, session.expiresAt);
-      }
-    });
-
-    transaction();
+    return { generatedAt: nowIso(), mode: "memory", snapshots: _snapshots.size };
   }
 }
 
@@ -380,51 +165,26 @@ class RuntimeStoreManager {
       mode: "sqlite",
       storage: {
         status: "connected",
-        type: "sqlite",
+        type: "memory",
         insights,
       },
     };
   }
 }
 
-class AuthStateStore {
-  constructor(options) {
-    this.storageDir =
-      options.storageDir || path.join(options.rootDir, "_private", "runtime");
-    this.filePath = path.join(this.storageDir, "auth-state.json");
-  }
-
-  async init() {
-    await fs.mkdir(this.storageDir, { recursive: true });
-    try {
-      await fs.access(this.filePath);
-    } catch (error) {
-      await this.write(createDefaultAuthState());
-    }
-  }
-
-  async read() {
-    const raw = await fs.readFile(this.filePath, "utf8");
-    return normalizeAuthState(JSON.parse(raw));
-  }
-
-  async write(state) {
-    const normalized = normalizeAuthState(state);
-    await fs.mkdir(this.storageDir, { recursive: true });
-    await fs.writeFile(this.filePath, JSON.stringify(normalized, null, 2), "utf8");
-    return normalized;
-  }
+// In-Memory Auth State — resets on cold start, acceptable for demo
+let _authState = null;
+function getMemoryAuthState() {
+  if (!_authState) _authState = createDefaultAuthState();
+  return _authState;
 }
 
 class AuthManager {
   constructor(options) {
-    this.fileStore = new AuthStateStore(options);
     this.runtimeStore = options.runtimeStore;
   }
 
-  async init() {
-    await this.fileStore.init();
-  }
+  async init() {}
 
   async getClientState(sessionId = "") {
     const state = await this.readState();
@@ -591,183 +351,19 @@ class AuthManager {
   }
 
   async readState() {
-    if (!this.isSQLiteBacked()) {
-      return this.fileStore.read();
-    }
-    await this.migrateFileAuthToSQLite();
-    return readAuthStateFromSQLite(this.runtimeStore.activeStore.db);
+    return normalizeAuthState(getMemoryAuthState());
   }
 
   async writeState(state) {
-    const normalized = normalizeAuthState(state);
-    if (!this.isSQLiteBacked()) {
-      return this.fileStore.write(normalized);
-    }
-    await writeAuthStateToSQLite(this.runtimeStore.activeStore.db, normalized);
-    return normalized;
-  }
-
-  isSQLiteBacked() {
-    return Boolean(
-      this.runtimeStore &&
-        this.runtimeStore.mode === "sqlite" &&
-        this.runtimeStore.activeStore &&
-        this.runtimeStore.activeStore.db
-    );
-  }
-
-  async migrateFileAuthToSQLite() {
-    if (!this.isSQLiteBacked()) {
-      return;
-    }
-    const db = this.runtimeStore.activeStore.db;
-    const current = db.prepare("SELECT COUNT(*) as count FROM grasspass_users").get();
-    if ((current?.count || 0) > 0) {
-      return;
-    }
-    const fileState = await this.fileStore.read();
-    if (fileState.users.length === 0 && fileState.invites.length === 0 && fileState.sessions.length === 0) {
-      return;
-    }
-    await writeAuthStateToSQLite(db, fileState);
+    _authState = normalizeAuthState(state);
+    return _authState;
   }
 }
 
-function readAuthStateFromSQLite(db) {
-  const users = db
-    .prepare("SELECT * FROM grasspass_users ORDER BY created_at ASC")
-    .all()
-    .map((row) => ({
-      id: row.id,
-      email: row.email,
-      displayName: row.display_name,
-      role: row.role,
-      passwordHash: row.password_hash,
-      createdAt: row.created_at,
-      updatedAt: row.updated_at,
-      lastLoginAt: row.last_login_at,
-    }));
-
-  const invites = db
-    .prepare("SELECT * FROM grasspass_invites ORDER BY created_at DESC")
-    .all()
-    .map((row) => ({
-      id: row.id,
-      code: row.code,
-      role: row.role,
-      note: row.note,
-      createdByUserId: row.created_by_user_id,
-      createdAt: row.created_at,
-      usedAt: row.used_at,
-      usedByUserId: row.used_by_user_id,
-    }));
-
-  const sessions = db
-    .prepare("SELECT * FROM grasspass_sessions ORDER BY created_at DESC")
-    .all()
-    .map((row) => ({
-      id: row.id,
-      userId: row.user_id,
-      createdAt: row.created_at,
-      expiresAt: row.expires_at,
-    }));
-
-  return normalizeAuthState({
-    users,
-    invites,
-    sessions,
-  });
-}
-
-async function writeAuthStateToSQLite(db, state) {
-  const normalized = normalizeAuthState(state);
-  const authState = {
-    users: normalized.users || [],
-    invites: normalized.invites || [],
-    sessions: normalized.sessions || [],
-  };
-
-  const transaction = db.transaction(() => {
-    // Delete users not in current set
-    const userIds = authState.users.map((u) => u.id);
-    if (userIds.length > 0) {
-      const placeholders = userIds.map(() => "?").join(",");
-      db.prepare(`DELETE FROM grasspass_users WHERE id NOT IN (${placeholders})`).run(...userIds);
-    } else {
-      db.prepare("DELETE FROM grasspass_users").run();
-    }
-
-    // Upsert users
-    for (const user of authState.users) {
-      db.prepare(
-        `INSERT OR REPLACE INTO grasspass_users
-         (id, email, display_name, role, password_hash, created_at, updated_at, last_login_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-      ).run(
-        user.id,
-        user.email,
-        user.displayName,
-        user.role,
-        user.passwordHash,
-        user.createdAt,
-        user.updatedAt,
-        user.lastLoginAt || null
-      );
-    }
-
-    // Delete invites not in current set
-    const inviteIds = authState.invites.map((i) => i.id);
-    if (inviteIds.length > 0) {
-      const placeholders = inviteIds.map(() => "?").join(",");
-      db.prepare(`DELETE FROM grasspass_invites WHERE id NOT IN (${placeholders})`).run(...inviteIds);
-    } else {
-      db.prepare("DELETE FROM grasspass_invites").run();
-    }
-
-    // Upsert invites
-    for (const invite of authState.invites) {
-      db.prepare(
-        `INSERT OR REPLACE INTO grasspass_invites
-         (id, code, role, note, created_by_user_id, created_at, used_at, used_by_user_id)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-      ).run(
-        invite.id,
-        invite.code,
-        invite.role,
-        invite.note || null,
-        invite.createdByUserId || null,
-        invite.createdAt,
-        invite.usedAt || null,
-        invite.usedByUserId || null
-      );
-    }
-
-    // Delete sessions not in current set
-    const sessionIds = authState.sessions.map((s) => s.id);
-    if (sessionIds.length > 0) {
-      const placeholders = sessionIds.map(() => "?").join(",");
-      db.prepare(`DELETE FROM grasspass_sessions WHERE id NOT IN (${placeholders})`).run(...sessionIds);
-    } else {
-      db.prepare("DELETE FROM grasspass_sessions").run();
-    }
-
-    // Upsert sessions
-    for (const session of authState.sessions) {
-      db.prepare(
-        `INSERT OR REPLACE INTO grasspass_sessions
-         (id, user_id, created_at, expires_at)
-         VALUES (?, ?, ?, ?)`
-      ).run(session.id, session.userId, session.createdAt, session.expiresAt);
-    }
-  });
-
-  transaction();
-}
-
-async function createStore(options) {
-  const sqliteStore = new SQLiteStore(options);
-  await sqliteStore.init();
-  return sqliteStore;
+async function createStore(_options) {
+  const store = new MemoryStore();
+  await store.init();
+  return store;
 }
 
 async function createAppServer(options = {}) {
@@ -806,10 +402,16 @@ async function createAppServer(options = {}) {
     })
   );
 
+  const handler = (req, res) =>
+    handleRequest(req, res, { rootDir, store, auth, jobs, backupDir }).catch((err) =>
+      sendJson(res, 500, { error: err.message || "Unexpected server error." })
+    );
+
   return {
     server,
     store,
     jobs,
+    handler,
     async start(port = options.port || Number(process.env.PORT || 3000)) {
       await new Promise((resolve) => server.listen(port, resolve));
       if (options.startSchedulers !== false) {
@@ -1051,15 +653,10 @@ async function handleMutationRequest(request, response, context, pathname) {
   }
 
   if (request.method === "POST" && pathname === "/api/backups/run") {
-    const metadata = await context.jobs.runBackupNow("manual", subject);
-    const snapshot = await scopedStore.readSnapshot();
     return sendJson(response, 200, {
       ok: true,
-      backup: metadata,
-      snapshot: sanitizeSnapshotForClient(snapshot),
-      dashboard: buildDashboard(snapshot),
-      health: buildHealth(snapshot),
-      storage: await context.store.getClientState(),
+      backup: null,
+      message: "Backups are not available in demo mode.",
     });
   }
 
