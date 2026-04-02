@@ -442,6 +442,9 @@ export function renderHealth() {
   refs.healthList.replaceChildren();
   const isAdmin = state.auth?.user?.role === "admin";
   const dbInsights = state.storage?.database?.insights;
+  const backupState = state.health?.backup || null;
+  const backupLabel = backupState?.label || "Backups unavailable";
+  const backupLastRun = backupState?.lastBackupAt || null;
   const cards = [
     {
       title: `Storage: ${state.health.storageMode}`,
@@ -452,10 +455,8 @@ export function renderHealth() {
       detail: "Zone geometry coverage",
     },
     {
-      title: state.health.backup.label,
-      detail: state.health.backup.lastBackupAt
-        ? `Last run ${formatDateTime(state.health.backup.lastBackupAt)}`
-        : "No backup yet",
+      title: backupLabel,
+      detail: backupLastRun ? `Last run ${formatDateTime(backupLastRun)}` : "No backup yet",
     },
     {
       title: `${state.health.queue.failed} queue failures`,
@@ -634,8 +635,9 @@ export function renderQueue() {
     refs.queueList,
     state.snapshot.syncQueue,
     (item) => {
+      const queueLabel = item?.label || item?.eventType || "Calendar event";
       const card = createEntityCard({
-        title: item.label,
+        title: queueLabel,
         badge: item.status,
         meta: [
           formatDayLabel(item.date),
