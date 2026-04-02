@@ -50,6 +50,10 @@ const LEGACY_STORAGE_KEY = "grasspass.v1";
 const DEFAULT_DATABASE_PORT = 5432;
 const SESSION_COOKIE_NAME = "grasspass.session";
 const SESSION_TTL_DAYS = 30;
+const DEMO_USER_ID = "usr_demo";
+const DEMO_SESSION_ID = "demo-session";
+const DEMO_USER_EMAIL = "demo@grasspass.local";
+const DEMO_USER_NAME = "Demo Admin";
 const RELATIONAL_SYNC_VERSION = 1;
 const PROFILE_ROW_KEY = "primary";
 const BACKUP_ROW_KEY = "primary";
@@ -188,118 +192,56 @@ class AuthManager {
 
   async getClientState(sessionId = "") {
     const state = await this.readState();
-    const normalized = await this.cleanupExpiredSessions(state);
-    const session = normalized.sessions.find((item) => item.id === sessionId) || null;
-    const user = session ? normalized.users.find((item) => item.id === session.userId) || null : null;
+    const cleaned = await this.cleanupExpiredSessions(state);
+    const { normalized, user, changed } = ensureDemoIdentity(cleaned);
+    if (changed) {
+      await this.writeState(normalized);
+    }
     return buildAuthClientState(normalized, user);
   }
 
   async requireUser(sessionId = "") {
     const state = await this.readState();
-    const normalized = await this.cleanupExpiredSessions(state);
-    const session = normalized.sessions.find((item) => item.id === sessionId) || null;
-    if (!session) {
-      return null;
+    const cleaned = await this.cleanupExpiredSessions(state);
+    const { normalized, user, changed } = ensureDemoIdentity(cleaned);
+    if (changed) {
+      await this.writeState(normalized);
     }
-    return normalized.users.find((item) => item.id === session.userId) || null;
+    return user;
   }
 
   async register(input) {
     const state = await this.readState();
-    const normalized = await this.cleanupExpiredSessions(state);
-    const hasUsers = normalized.users.length > 0;
-    const email = normalizeEmail(input.email);
-    const displayName = sanitizeText(input.displayName, 80);
-    const password = String(input.password || "");
-    const inviteCode = sanitizeText(input.inviteCode, 80).toUpperCase();
-
-    if (!email || !displayName || password.length < 8) {
-      throw new Error("Display name, email, and an 8+ character password are required.");
+    const { normalized, user, changed, sessionId } = ensureDemoIdentity(state);
+    if (changed) {
+      await this.writeState(normalized);
     }
-    if (normalized.users.some((item) => item.email === email)) {
-      throw new Error("That email is already registered.");
-    }
-
-    let role = "member";
-    if (!hasUsers) {
-      role = "admin";
-    } else {
-      const invite = normalized.invites.find(
-        (item) => item.code === inviteCode && !item.usedAt
-      );
-      if (!invite) {
-        throw new Error("A valid invite code is required for registration.");
-      }
-      role = invite.role || "member";
-      invite.usedAt = nowIso();
-    }
-
-    const userId = createId("usr");
-    const passwordHash = hashPassword(password);
-    const user = {
-      id: userId,
-      email,
-      displayName,
-      role,
-      passwordHash,
-      createdAt: nowIso(),
-      updatedAt: nowIso(),
-      lastLoginAt: nowIso(),
-    };
-    normalized.users.push(user);
-
-    if (hasUsers) {
-      const invite = normalized.invites.find(
-        (item) => item.code === inviteCode && item.usedAt && !item.usedByUserId
-      );
-      if (invite) {
-        invite.usedByUserId = userId;
-      }
-    }
-
-    const session = createSessionRecord(userId);
-    normalized.sessions = normalized.sessions
-      .filter((item) => item.userId !== userId)
-      .concat(session);
-    await this.writeState(normalized);
-
     return {
-      sessionId: session.id,
-      auth: buildAuthClientState(normalized, sanitizeUserForClient(user)),
+      sessionId,
+      auth: buildAuthClientState(normalized, user),
     };
   }
 
   async login(input) {
     const state = await this.readState();
-    const normalized = await this.cleanupExpiredSessions(state);
-    const email = normalizeEmail(input.email);
-    const password = String(input.password || "");
-    const user = normalized.users.find((item) => item.email === email);
-    if (!user || !verifyPassword(password, user.passwordHash)) {
-      throw new Error("Email or password is incorrect.");
+    const { normalized, user, changed, sessionId } = ensureDemoIdentity(state);
+    if (changed) {
+      await this.writeState(normalized);
     }
-
-    user.lastLoginAt = nowIso();
-    user.updatedAt = nowIso();
-    const session = createSessionRecord(user.id);
-    normalized.sessions = normalized.sessions
-      .filter((item) => item.userId !== user.id)
-      .concat(session);
-    await this.writeState(normalized);
-
     return {
-      sessionId: session.id,
-      auth: buildAuthClientState(normalized, sanitizeUserForClient(user)),
+      sessionId,
+      auth: buildAuthClientState(normalized, user),
     };
   }
 
   async logout(sessionId = "") {
     const state = await this.readState();
-    const normalized = await this.cleanupExpiredSessions(state);
-    normalized.sessions = normalized.sessions.filter((item) => item.id !== sessionId);
-    await this.writeState(normalized);
+    const { normalized, user, changed } = ensureDemoIdentity(state);
+    if (changed) {
+      await this.writeState(normalized);
+    }
     return {
-      auth: buildAuthClientState(normalized, null),
+      auth: buildAuthClientState(normalized, user),
     };
   }
 
@@ -1950,6 +1892,53 @@ function buildAuthClientStateFromUser(user, fallbackState) {
   return {
     ...fallbackState,
     user: user ? sanitizeUserForClient(user) : fallbackState.user || null,
+  };
+}
+
+function ensureDemoIdentity(state) {
+  const normalized = normalizeAuthState(state);
+  let changed = false;
+  const now = nowIso();
+  let user = normalized.users.find((item) => item.id === DEMO_USER_ID) || null;
+
+  if (!user) {
+    user = {
+      id: DEMO_USER_ID,
+      email: DEMO_USER_EMAIL,
+      displayName: DEMO_USER_NAME,
+      role: "admin",
+      passwordHash: "demo-mode",
+      createdAt: now,
+      updatedAt: now,
+      lastLoginAt: now,
+    };
+    normalized.users.unshift(user);
+    changed = true;
+  }
+
+  if (user.role !== "admin") {
+    user.role = "admin";
+    user.updatedAt = now;
+    changed = true;
+  }
+
+  const demoSession = normalized.sessions.find((item) => item.id === DEMO_SESSION_ID) || null;
+  if (!demoSession || demoSession.userId !== DEMO_USER_ID) {
+    normalized.sessions = normalized.sessions.filter((item) => item.id !== DEMO_SESSION_ID);
+    normalized.sessions.push({
+      id: DEMO_SESSION_ID,
+      userId: DEMO_USER_ID,
+      createdAt: now,
+      expiresAt: addDaysIso(3650),
+    });
+    changed = true;
+  }
+
+  return {
+    normalized,
+    user: sanitizeUserForClient(user),
+    sessionId: DEMO_SESSION_ID,
+    changed,
   };
 }
 
