@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Environment — contains API keys and secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data — SQLite database, session state, backups
+_private/runtime/
+_private/logs/
+
+# Misc
+*.log
+*.local
+session-secret*
+.DS_Store
+Thumbs.db

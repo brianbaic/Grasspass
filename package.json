@@ -1,0 +1,14 @@
+{
+  "name": "grasspass",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Functionality-first GrassPass MVP with an API-backed timeline, zone registry, persistence, and sync queue.",
+  "scripts": {
+    "start": "node server.js",
+    "preview": "node scripts/live-preview.js",
+    "smoke": "node scripts/smoke-test.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0"
+  }
+}

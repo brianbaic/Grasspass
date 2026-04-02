@@ -1,0 +1,799 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grasspass | Lawn Planner</title>
+    <meta name="description" content="GrassPass helps map the lawn, plan treatments, log mowing, and keep the season organized in one focused workspace." />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      :root {
+        --color-secondary:                #526350;
+        --color-outline-variant:          #c2c9bb;
+        --color-on-primary-container:     #9dd090;
+        --color-on-secondary:             #ffffff;
+        --color-surface-container-highest:#e1e3e0;
+        --color-surface-container-high:   #e7e9e6;
+        --color-surface-container:        #eceeeb;
+        --color-primary-container:        #2d5a27;
+        --color-surface-container-lowest: #ffffff;
+        --color-outline:                  #72796e;
+        --color-secondary-container:      #d5e8cf;
+        --color-on-secondary-container:   #586955;
+        --color-surface-container-low:    #f2f4f1;
+        --color-on-primary:               #ffffff;
+        --color-primary:                  #154212;
+        --color-error:                    #ba1a1a;
+        --color-error-container:          #ffdad6;
+        --color-surface:                  #f8faf7;
+        --color-on-surface:               #191c1b;
+        --color-on-background:            #191c1b;
+        --color-on-surface-variant:       #42493e;
+      }
+      html.dark {
+        --color-secondary:                #a0b09e;
+        --color-outline-variant:          #3c453b;
+        --color-on-primary-container:     #a4d4a0;
+        --color-on-secondary:             #1a2a18;
+        --color-surface-container-highest:#2e3a2d;
+        --color-surface-container-high:   #263326;
+        --color-surface-container:        #1f2a1e;
+        --color-primary-container:        #1c3e1a;
+        --color-surface-container-lowest: #0d140d;
+        --color-outline:                  #8d978a;
+        --color-secondary-container:      #3a4e38;
+        --color-on-secondary-container:   #c8dcc5;
+        --color-surface-container-low:    #1a2219;
+        --color-on-primary:               #083208;
+        --color-primary:                  #88c986;
+        --color-error:                    #ffb4ab;
+        --color-error-container:          #690005;
+        --color-surface:                  #131a12;
+        --color-on-surface:               #dde4da;
+        --color-on-background:            #dde4da;
+        --color-on-surface-variant:       #b2bca9;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary":                "var(--color-secondary)",
+              "outline-variant":          "var(--color-outline-variant)",
+              "on-primary-container":     "var(--color-on-primary-container)",
+              "on-secondary":             "var(--color-on-secondary)",
+              "surface-container-highest":"var(--color-surface-container-highest)",
+              "surface-container-high":   "var(--color-surface-container-high)",
+              "surface-container":        "var(--color-surface-container)",
+              "primary-container":        "var(--color-primary-container)",
+              "surface-container-lowest": "var(--color-surface-container-lowest)",
+              "outline":                  "var(--color-outline)",
+              "secondary-container":      "var(--color-secondary-container)",
+              "on-secondary-container":   "var(--color-on-secondary-container)",
+              "surface-container-low":    "var(--color-surface-container-low)",
+              "on-primary":               "var(--color-on-primary)",
+              "primary":                  "var(--color-primary)",
+              "error":                    "var(--color-error)",
+              "error-container":          "var(--color-error-container)",
+              "surface":                  "var(--color-surface)",
+              "on-surface":               "var(--color-on-surface)",
+              "on-background":            "var(--color-on-background)",
+              "on-surface-variant":       "var(--color-on-surface-variant)",
+            },
+            fontFamily: {
+              "headline": ["Manrope", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+            },
+          },
+        },
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body class="bg-surface text-on-surface font-body antialiased">
+
+    <!-- ── Fixed Top Navigation ── -->
+    <nav class="tonal-nav fixed top-0 w-full z-50 h-16 flex items-center justify-between px-6 lg:px-12" aria-label="Primary">
+      <div class="flex items-center gap-8">
+        <span class="text-xl font-black text-primary tracking-tight font-headline select-none">Grasspass</span>
+        <div class="hidden md:flex gap-1 items-center">
+          <button class="nav-btn px-4 py-2 text-sm font-semibold font-headline tracking-tight rounded-lg transition-all" data-section-target="overview">Overview</button>
+          <button class="nav-btn px-4 py-2 text-sm font-semibold font-headline tracking-tight rounded-lg transition-all" data-section-target="planner">Planner</button>
+          <button class="nav-btn px-4 py-2 text-sm font-semibold font-headline tracking-tight rounded-lg transition-all" data-section-target="lawn-map">Lawn Map</button>
+          <button class="nav-btn px-4 py-2 text-sm font-semibold font-headline tracking-tight rounded-lg transition-all" data-section-target="inventory">Inventory</button>
+          <button class="nav-btn px-4 py-2 text-sm font-semibold font-headline tracking-tight rounded-lg transition-all" data-section-target="settings">Settings</button>
+        </div>
+      </div>
+      <div class="flex items-center gap-1">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <span class="material-symbols-outlined" style="font-size:22px">dark_mode</span>
+        </button>
+        <span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 hover:bg-surface-container rounded-lg transition-all" style="font-size:22px">notifications</span>
+        <button id="profile-button" class="profile-button" type="button" aria-haspopup="menu" aria-expanded="false">
+          <span id="profile-icon" class="material-symbols-outlined" style="font-size:28px">account_circle</span>
+          <span id="profile-label" class="hidden md:inline">Account</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ── Main ── -->
+    <main class="pt-16">
+
+      <!-- Status Banner (inside main, flows below nav) -->
+      <div id="status-banner" class="status-banner" hidden></div>
+
+      <!-- ════════════════════════ OVERVIEW ════════════════════════ -->
+      <section id="overview" class="view active" aria-label="Overview">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-8 space-y-8">
+
+          <!-- Hero Header -->
+          <header class="hero-header relative overflow-hidden rounded-[2rem] px-8 py-10 lg:px-14 lg:py-14">
+            <div class="hero-fade" aria-hidden="true"></div>
+            <div class="relative z-10 max-w-2xl">
+              <h1 class="font-headline font-extrabold text-4xl lg:text-6xl text-white tracking-tight leading-[1.02]">
+                Map the lawn.<br/>Plan the work.<br/>Keep the rhythm.
+              </h1>
+              <p id="hero-meta" class="mt-6 text-on-primary-container text-lg font-light leading-relaxed max-w-xl">
+                Your field guide for mapping the lawn, planning treatments, logging mowing, and keeping the season in motion.
+              </p>
+            </div>
+          </header>
+
+          <!-- Greeting + Status + View Switcher -->
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div class="space-y-2">
+              <div id="estate-status" class="estate-pill">Plan Status: Getting Started</div>
+              <h2 id="overview-greeting" class="font-headline font-bold text-3xl lg:text-4xl text-primary">Evening, Home Lawn.</h2>
+              <p id="overview-copy" class="text-on-surface-variant text-base max-w-2xl leading-relaxed">GrassPass is shaping your lawn map, planner, and mowing rhythm.</p>
+            </div>
+            <div class="flex gap-2 p-1.5 bg-surface-container-low rounded-2xl flex-shrink-0">
+              <button class="nav-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold font-headline rounded-xl transition-all" data-section-target="overview">
+                <span class="material-symbols-outlined" style="font-size:18px">grid_view</span>Overview
+              </button>
+              <button class="nav-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold font-headline rounded-xl transition-all" data-section-target="planner">
+                <span class="material-symbols-outlined" style="font-size:18px">calendar_today</span>Planner
+              </button>
+              <button class="nav-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold font-headline rounded-xl transition-all" data-section-target="lawn-map">
+                <span class="material-symbols-outlined" style="font-size:18px">map</span>Map
+              </button>
+            </div>
+          </div>
+
+          <!-- Bento Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- Season Readiness -->
+            <div class="lg:col-span-8 bg-surface-container-low rounded-[2rem] p-8 lg:p-10 flex flex-col md:flex-row items-center gap-10">
+              <!-- Growth Monitor (SVG) -->
+              <div id="growth-dial" class="relative w-56 h-56 flex-shrink-0" aria-label="Lawn vitality">
+                <svg class="w-full h-full" style="transform:rotate(-90deg)" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="44" fill="transparent" stroke="currentColor" stroke-width="8" class="text-secondary-container"/>
+                  <circle cx="50" cy="50" r="44" fill="transparent" stroke="currentColor" stroke-width="8" stroke-linecap="round" class="text-primary growth-dial-arc" stroke-dasharray="276.46"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                  <p id="growth-dial-value" class="growth-dial-value">0%</p>
+                  <p class="growth-dial-label">Care Rhythm</p>
+                </div>
+              </div>
+              <!-- Season Copy -->
+              <div class="flex-1 space-y-5 text-center md:text-left">
+                <h3 id="readiness-title" class="font-headline font-bold text-2xl lg:text-3xl text-on-surface">Preparing the lawn plan…</h3>
+                <p id="readiness-note" class="text-on-surface-variant text-base lg:text-lg leading-relaxed">GrassPass is loading the lawn map, planner, and mowing story.</p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                  <button class="btn-pill-primary" data-section-target="planner">Update Progress</button>
+                  <button id="care-rhythm-guide-button" class="btn-pill-outline" data-section-target="getting-started" hidden>Getting Started</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="lg:col-span-4">
+              <div id="overview-metrics" class="overview-metrics"></div>
+            </div>
+
+            <!-- Horticulture or Hoax -->
+            <div class="lg:col-span-12 bg-surface-container-low rounded-[2rem] p-8 lg:p-10">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-5">
+                <div class="space-y-1 flex-1 min-w-0">
+                  <p class="eyebrow-label">Horticulture or Hoax</p>
+                  <h3 id="hort-hoax-claim" class="font-headline font-bold text-xl lg:text-2xl text-on-surface leading-snug">Loading lawn tip…</h3>
+                </div>
+                <span id="hort-hoax-verdict-badge" class="hidden flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-bold font-headline"></span>
+              </div>
+              <p id="hort-hoax-explanation" class="text-on-surface-variant text-base leading-relaxed mb-4"></p>
+              <div class="flex flex-wrap gap-3 items-center mb-5">
+                <p id="hort-hoax-best-practice" class="text-sm text-on-surface-variant italic"></p>
+                <span id="hort-hoax-category" class="overview-meta-chip"></span>
+              </div>
+              <div class="flex items-end justify-between gap-3">
+                <button id="hort-hoax-prev" class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-high text-primary rounded-xl font-bold font-headline text-sm hover:bg-surface-container-highest transition-colors flex-shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" type="button" disabled>
+                  <span class="material-symbols-outlined" style="font-size:18px">arrow_back</span>
+                  Previous tip
+                </button>
+                <button id="hort-hoax-next" class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-high text-primary rounded-xl font-bold font-headline text-sm hover:bg-surface-container-highest transition-colors flex-shrink-0 cursor-pointer" type="button">
+                  Next tip
+                  <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Weekly Snapshot -->
+            <div class="lg:col-span-12 bg-surface-container-low rounded-[2rem] p-8 lg:p-10 space-y-6">
+              <div class="weekly-snapshot-header flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div class="weekly-snapshot-heading space-y-1">
+                  <h3 id="planner-focus-title" class="font-headline font-bold text-2xl text-on-surface">This week is coming into focus.</h3>
+                  <p id="planner-focus-copy" class="text-on-surface-variant text-sm">Logged and scheduled activity will collect here.</p>
+                </div>
+                <div class="weekly-snapshot-actions flex flex-wrap items-center gap-3">
+                  <button id="overview-prev-period" class="btn-pill-ghost" type="button">Previous Week</button>
+                  <button id="overview-next-period" class="btn-pill-ghost" type="button">Next Week</button>
+                  <button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-high text-primary rounded-xl font-bold font-headline text-sm hover:bg-surface-container-highest transition-colors flex-shrink-0 cursor-pointer" data-section-target="planner">
+                    Open Planner
+                    <span class="material-symbols-outlined" style="font-size:18px">arrow_outward</span>
+                  </button>
+                </div>
+              </div>
+              <div id="planner-focus-meta" class="flex flex-wrap gap-3"></div>
+              <div id="weekly-snapshot-days" class="weekly-snapshot-days"></div>
+              <div id="weekly-snapshot-list" class="weekly-snapshot-list"></div>
+            </div>
+
+            <!-- Upcoming Activities -->
+            <div class="lg:col-span-6 bg-surface-container-lowest rounded-[2rem] p-8 lg:p-10 border border-outline-variant/10">
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="font-headline font-bold text-xl text-on-surface">Upcoming Activities</h3>
+                <button class="text-primary text-sm font-bold font-headline hover:underline cursor-pointer" data-section-target="planner">View Planner</button>
+              </div>
+              <div id="overview-upcoming" class="overview-showcase-grid"></div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="lg:col-span-6 bg-surface-container-lowest rounded-[2rem] p-8 lg:p-10 border border-outline-variant/10">
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="font-headline font-bold text-xl text-on-surface">Recent Activity</h3>
+                <span class="material-symbols-outlined text-outline" style="font-size:22px">history</span>
+              </div>
+              <div id="overview-activity" class="list-stack overview-activity-list"></div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════ GETTING STARTED ════════════════════════ -->
+      <section id="getting-started" class="view" aria-label="Getting started">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-8 space-y-8">
+          <div class="bg-surface-container-low rounded-[2rem] p-8 lg:p-10 space-y-8">
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+              <div class="space-y-3 max-w-3xl">
+                <p class="eyebrow-label">Care Rhythm Guide</p>
+                <h1 id="getting-started-title" class="font-headline font-bold text-3xl lg:text-4xl text-on-surface">Build the first 100% season rhythm.</h1>
+                <p id="getting-started-copy" class="text-on-surface-variant text-base lg:text-lg leading-relaxed">GrassPass turns your lawn setup into a visible checklist so you always know what is still missing and what to do next.</p>
+              </div>
+              <div class="flex flex-wrap gap-3">
+                <button class="btn-pill-ghost" data-section-target="overview" type="button">Back to Overview</button>
+                <button class="btn-pill-primary" data-section-target="planner" type="button">Open Planner</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] gap-8">
+              <div class="space-y-6">
+                <div class="getting-started-panel">
+                  <div class="getting-started-progress-row">
+                    <div>
+                      <p class="eyebrow-label">Current Progress</p>
+                      <h2 id="getting-started-score" class="font-headline font-bold text-3xl text-on-surface">0%</h2>
+                    </div>
+                    <p id="getting-started-score-copy" class="text-on-surface-variant text-sm max-w-md">Each completed routine strengthens the system and raises the care rhythm score.</p>
+                  </div>
+                  <div class="getting-started-progress-track" aria-hidden="true">
+                    <div id="getting-started-progress-bar" class="getting-started-progress-bar"></div>
+                  </div>
+                </div>
+
+                <div class="getting-started-panel">
+                  <p class="eyebrow-label">Outstanding Tasks</p>
+                  <div id="getting-started-checklist" class="getting-started-checklist"></div>
+                </div>
+              </div>
+
+              <div class="space-y-6">
+                <div class="getting-started-panel">
+                  <p class="eyebrow-label">How The UI Works</p>
+                  <div id="getting-started-areas" class="getting-started-areas"></div>
+                </div>
+                <div class="getting-started-panel">
+                  <p class="eyebrow-label">Next Best Step</p>
+                  <p id="getting-started-next-step" class="text-on-surface text-lg font-semibold leading-relaxed">Open the planner and line up the next lawn action.</p>
+                  <div class="mt-4">
+                    <button id="getting-started-next-action" class="btn-pill-primary" type="button" data-section-target="planner">Go To Step</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════ PLANNER ════════════════════════ -->
+      <section id="planner" class="view" aria-label="Planner">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-8 space-y-8">
+
+          <!-- Timeline Panel -->
+          <div class="bg-surface-container-low rounded-[2rem] p-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div>
+                <p class="eyebrow-label">Planner</p>
+                <h2 class="font-headline font-bold text-2xl text-on-surface">Unified Planner</h2>
+              </div>
+              <div class="flex gap-2 p-1.5 bg-surface-container rounded-2xl">
+                <button id="timeline-prev-period" class="toggle-btn px-5 py-2 text-sm font-bold font-headline rounded-xl transition-all" type="button">Previous</button>
+                <button id="timeline-range-week" class="toggle-btn px-5 py-2 text-sm font-bold font-headline rounded-xl transition-all" type="button">Week</button>
+                <button id="timeline-range-month" class="toggle-btn active px-5 py-2 text-sm font-bold font-headline rounded-xl transition-all" type="button">Month</button>
+                <button id="timeline-next-period" class="toggle-btn px-5 py-2 text-sm font-bold font-headline rounded-xl transition-all" type="button">Next</button>
+              </div>
+            </div>
+            <p id="timeline-caption" class="text-on-surface-variant text-sm mb-2">Loading timeline window…</p>
+            <div id="timeline-days" class="timeline-strip"></div>
+            <div id="timeline-events" class="timeline-stack"></div>
+          </div>
+
+          <!-- Treatments -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-surface-container-low rounded-[2rem] p-8">
+              <p class="eyebrow-label">Treatments</p>
+              <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Plan Treatment</h2>
+              <form id="treatment-form" class="form-grid">
+                <input id="treatment-id" type="hidden" />
+                <label class="field-label" for="treatment-date">Date</label>
+                <input id="treatment-date" class="field-input" type="date" required />
+                <label class="field-label" for="treatment-zone">Zone</label>
+                <select id="treatment-zone" class="field-input" required></select>
+                <label class="field-label" for="treatment-type">Treatment Type</label>
+                <select id="treatment-type" class="field-input">
+                  <option value="Fertilizer">Fertilizer</option>
+                  <option value="Herbicide">Herbicide</option>
+                  <option value="Insect Control">Insect Control</option>
+                  <option value="Seed / Overseed">Seed / Overseed</option>
+                  <option value="Soil Amendment">Soil Amendment</option>
+                </select>
+                <label class="field-label" for="treatment-product">Linked Product</label>
+                <select id="treatment-product" class="field-input"></select>
+                <label class="field-label" for="treatment-repeat">Repeat Every (days)</label>
+                <input id="treatment-repeat" class="field-input" type="number" min="0" max="365" step="1" placeholder="Optional" />
+                <label class="field-label" for="treatment-notes">Notes</label>
+                <textarea id="treatment-notes" class="field-input" rows="3" maxlength="400" placeholder="Weather window, rate, reminders"></textarea>
+                <label class="toggle-row" for="treatment-push">
+                  <input id="treatment-push" class="toggle-input" type="checkbox" checked />
+                  <span class="toggle-control" aria-hidden="true"></span>
+                  <span class="toggle-copy">Queue this event for Google Calendar push</span>
+                </label>
+                <div class="button-row">
+                  <button id="treatment-save" class="btn-pill-primary" type="submit">Save Treatment</button>
+                  <button id="treatment-cancel" class="btn-pill-ghost" type="button">Cancel</button>
+                </div>
+              </form>
+            </div>
+            <div class="bg-surface-container-low rounded-[2rem] p-8">
+              <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Treatment Plans</h2>
+              <div id="treatments-list" class="list-stack scroll-panel-body scroll-panel-body-list"></div>
+            </div>
+          </div>
+
+          <!-- Mowing -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-surface-container-low rounded-[2rem] p-8">
+              <p class="eyebrow-label">Mowing</p>
+              <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Log Mowing Session</h2>
+              <form id="mowing-form" class="form-grid">
+                <input id="mowing-id" type="hidden" />
+                <label class="field-label" for="mowing-date">Date</label>
+                <input id="mowing-date" class="field-input" type="date" required />
+                <label class="field-label" for="mowing-zone">Zone</label>
+                <select id="mowing-zone" class="field-input" required></select>
+                <label class="field-label" for="mowing-duration">Duration (minutes)</label>
+                <input id="mowing-duration" class="field-input" type="number" min="1" max="600" required />
+                <label class="field-label" for="mowing-height">Cut Height (inches)</label>
+                <input id="mowing-height" class="field-input" type="number" min="0.5" max="6.5" step="0.1" required />
+                <label class="field-label" for="mowing-clippings">Clippings</label>
+                <select id="mowing-clippings" class="field-input">
+                  <option value="Mulched">Mulched</option>
+                  <option value="Bagged">Bagged</option>
+                  <option value="Side Discharge">Side Discharge</option>
+                </select>
+                <label class="field-label" for="mowing-notes">Notes</label>
+                <textarea id="mowing-notes" class="field-input" rows="3" maxlength="400" placeholder="Stripe quality, turf condition, cleanup notes"></textarea>
+                <label class="toggle-row" for="mowing-push">
+                  <input id="mowing-push" class="toggle-input" type="checkbox" checked />
+                  <span class="toggle-control" aria-hidden="true"></span>
+                  <span class="toggle-copy">Queue this mowing log for Google Calendar push</span>
+                </label>
+                <div class="button-row">
+                  <button id="mowing-save" class="btn-pill-primary" type="submit">Save Mowing Log</button>
+                  <button id="mowing-cancel" class="btn-pill-ghost" type="button">Cancel</button>
+                </div>
+              </form>
+            </div>
+            <div class="bg-surface-container-low rounded-[2rem] p-8">
+              <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Mowing History</h2>
+              <div id="mowing-list" class="list-stack scroll-panel-body scroll-panel-body-list"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════ LAWN MAP ════════════════════════ -->
+      <section id="lawn-map" class="view" aria-label="Lawn map">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-8">
+          <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.3fr)_minmax(300px,0.9fr)] gap-8 lg:items-stretch">
+
+            <!-- Map Panel -->
+            <div class="bg-surface-container-low rounded-[2rem] p-8 h-full">
+              <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+                <div>
+                  <p class="eyebrow-label">Lawn Map</p>
+                  <h2 class="font-headline font-bold text-2xl text-on-surface">Satellite Mapping</h2>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <button id="locate-map" class="btn-pill-secondary" type="button">Locate Me</button>
+                  <button id="focus-zones" class="btn-pill-ghost" type="button">Focus Zones</button>
+                  <button id="clear-draft" class="btn-pill-ghost" type="button">Clear Draft</button>
+                </div>
+              </div>
+              <p class="helper-copy">Draw new zones on the map, edit saved polygons, and keep one canonical zone registry shared by planning, mowing, and calendar events.</p>
+              <p id="zone-area-readout" class="highlight-text">No zone geometry loaded yet.</p>
+              <div class="map-canvas-wrap">
+                <div id="map-canvas" class="map-canvas" role="application"></div>
+                <div id="map-onboard" class="map-onboard" aria-hidden="true">
+                  <span class="material-symbols-outlined map-onboard-icon">yard</span>
+                  <p class="map-onboard-title">Draw your first zone</p>
+                  <p class="map-onboard-hint">Use the polygon tool in the top-left corner of the map to outline your lawn areas.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Zone Metadata Panel -->
+            <div class="bg-surface-container-low rounded-[2rem] p-8 h-full flex flex-col">
+              <p class="eyebrow-label">Zone Metadata</p>
+              <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Save or Edit Zone</h2>
+              <form id="zone-form" class="form-grid">
+                <input id="zone-id" type="hidden" />
+                <label class="field-label" for="zone-name">Zone Name</label>
+                <input id="zone-name" class="field-input" name="name" type="text" maxlength="80" placeholder="Front Lawn, Backyard, Side Strip" required />
+                <label class="field-label" for="zone-surface">Surface</label>
+                <select id="zone-surface" class="field-input" name="surface">
+                  <option value="Mixed Turf">Mixed Turf</option>
+                  <option value="Cool-Season">Cool-Season</option>
+                  <option value="Warm-Season">Warm-Season</option>
+                  <option value="Shaded">Shaded</option>
+                  <option value="High Traffic">High Traffic</option>
+                </select>
+                <label class="field-label" for="zone-notes">Notes</label>
+                <textarea id="zone-notes" class="field-input" name="notes" rows="3" maxlength="400" placeholder="Slope, irrigation notes, traffic, sunlight"></textarea>
+                <p id="zone-form-status" class="compact-helper">Draw a polygon on the map, then save the zone.</p>
+                <div class="button-row">
+                  <button id="zone-save" class="btn-pill-primary" type="submit">Save Zone</button>
+                  <button id="zone-cancel" class="btn-pill-ghost" type="button">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+          <div class="bg-surface-container-low rounded-[2rem] p-8 mt-8">
+            <h3 class="font-headline font-bold text-xl text-on-surface mb-4">Lawn Zones</h3>
+            <div id="zones-list" class="list-stack"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════ INVENTORY ════════════════════════ -->
+      <section id="inventory" class="view" aria-label="Product inventory">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <div class="bg-surface-container-low rounded-[2rem] p-8">
+              <p class="eyebrow-label">Products</p>
+              <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Product Inventory</h2>
+              <form id="product-form" class="form-grid">
+                <input id="product-id" type="hidden" />
+                <label class="field-label" for="product-name">Product Name</label>
+                <input id="product-name" class="field-input" type="text" maxlength="120" placeholder="e.g. Turf Builder Lawn Food" required />
+                <label class="field-label" for="product-category">Category</label>
+                <select id="product-category" class="field-input">
+                  <option value="Fertilizer">Fertilizer</option>
+                  <option value="Herbicide">Herbicide</option>
+                  <option value="Insect Control">Insect Control</option>
+                  <option value="Soil Amendment">Soil Amendment</option>
+                  <option value="Seed">Seed</option>
+                  <option value="Other">Other</option>
+                </select>
+                <label class="field-label" for="product-active">Active Ingredient</label>
+                <input id="product-active" class="field-input" type="text" maxlength="120" />
+                <label class="field-label" for="product-rate">Coverage Rate (sq ft / unit)</label>
+                <input id="product-rate" class="field-input" type="number" min="0" max="250000" step="1" />
+                <label class="field-label" for="product-quantity">Quantity On Hand</label>
+                <input id="product-quantity" class="field-input" type="number" min="0" max="10000" step="0.01" />
+                <label class="field-label" for="product-unit">Unit</label>
+                <select id="product-unit" class="field-input">
+                  <option value="bag">bag</option>
+                  <option value="lb">lb</option>
+                  <option value="oz">oz</option>
+                  <option value="gal">gal</option>
+                  <option value="qt">qt</option>
+                  <option value="bottle">bottle</option>
+                </select>
+                <label class="field-label" for="product-notes">Notes</label>
+                <textarea id="product-notes" class="field-input" rows="3" maxlength="400"></textarea>
+                <div class="button-row">
+                  <button id="product-save" class="btn-pill-primary" type="submit">Save Product</button>
+                  <button id="product-cancel" class="btn-pill-ghost" type="button">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="bg-surface-container-low rounded-[2rem] p-8">
+              <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Inventory List</h2>
+              <div id="products-list" class="list-stack"></div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════ SETTINGS ════════════════════════ -->
+      <section id="settings" class="view settings-view" aria-label="Settings">
+        <div class="settings-shell max-w-[1440px] mx-auto px-6 lg:px-12 py-8 space-y-6">
+
+          <!-- Settings tab strip -->
+          <div class="flex gap-2 p-1.5 bg-surface-container rounded-2xl w-fit">
+            <button id="settings-tab-connections" class="toggle-btn active px-5 py-2 text-sm font-bold font-headline rounded-xl transition-all" type="button">Connections</button>
+            <button id="settings-tab-property" class="toggle-btn px-5 py-2 text-sm font-bold font-headline rounded-xl transition-all" type="button">Property</button>
+            <button id="settings-tab-access" class="toggle-btn px-5 py-2 text-sm font-bold font-headline rounded-xl transition-all" type="button">Access</button>
+          </div>
+
+          <!-- Connections: Google Calendar + Rachio -->
+          <div id="settings-group-connections">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              <!-- Google Calendar -->
+              <div class="bg-surface-container-low rounded-[2rem] p-8">
+                <p class="eyebrow-label">Google Calendar</p>
+                <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">One-Way Push</h2>
+                <form id="google-form" class="form-grid">
+                  <label class="field-label" for="google-calendar-id">Calendar ID</label>
+                  <input id="google-calendar-id" class="field-input" type="text" maxlength="160" placeholder="primary or your calendar id" />
+                  <label class="field-label" for="google-access-token">Manual Access Token</label>
+                  <textarea id="google-access-token" class="field-input" rows="4" maxlength="4096" placeholder="Paste a Google OAuth access token for MVP push testing"></textarea>
+                  <p class="compact-helper">Tokens are stored server-side only. This MVP ships a manual token workflow instead of a full OAuth flow.</p>
+                  <div class="button-row">
+                    <button class="btn-pill-primary" type="submit">Save Connection</button>
+                    <button id="google-disconnect" class="btn-pill-ghost" type="button">Disconnect</button>
+                    <button id="google-resync" class="btn-pill-secondary" type="button">Manual Resync</button>
+                  </div>
+                </form>
+                <div id="google-status" class="status-card"></div>
+              </div>
+
+              <!-- Rachio Integration -->
+              <div class="bg-surface-container-low rounded-[2rem] p-8">
+                <p class="eyebrow-label">Rachio</p>
+                <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Smart Irrigation</h2>
+                <form id="rachio-form" class="form-grid">
+                  <label class="field-label" for="rachio-api-key">Rachio API Key</label>
+                  <input id="rachio-api-key" class="field-input" type="password" maxlength="240" placeholder="Enter your Rachio API key" />
+                  <p class="compact-helper">Get your API key from <a href="https://app.rach.io/" target="_blank" rel="noopener" style="color: #0d631b; text-decoration: underline;">the Rachio web app</a>, then open Account Settings and click Get API Key. API keys are stored server-side only.</p>
+                  <div class="button-row">
+                    <button class="btn-pill-primary" type="submit">Save Key</button>
+                    <button id="rachio-sync-btn" class="btn-pill-secondary" type="button">Sync Schedule</button>
+                    <button id="rachio-disconnect" class="btn-pill-ghost" type="button">Disconnect</button>
+                  </div>
+                </form>
+                <div id="rachio-status" class="status-card"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Property: Profile + Health, Import + Backups -->
+          <div id="settings-group-property" hidden>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              <div class="space-y-8">
+                <!-- Profile + Health -->
+                <div class="bg-surface-container-low rounded-[2rem] p-8">
+                  <p class="eyebrow-label">Property</p>
+                  <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Property and System</h2>
+                  <form id="profile-form" class="form-grid">
+                    <label class="field-label" for="profile-name">Property Name</label>
+                    <input id="profile-name" class="field-input" type="text" maxlength="80" />
+                    <label class="field-label" for="profile-location">Property Location</label>
+                    <div class="autocomplete-field">
+                      <input id="profile-location" class="field-input" type="text" maxlength="160" autocomplete="off" placeholder="Address, city, or ZIP for forecast" aria-autocomplete="list" aria-expanded="false" aria-controls="profile-location-suggestions" />
+                      <div id="profile-location-suggestions" class="autocomplete-panel" role="listbox" hidden></div>
+                    </div>
+                    <p class="compact-helper">Start typing and choose a suggested address format for more reliable forecast matching.</p>
+                    <label class="field-label" for="profile-area">Manual Area Fallback (sq ft)</label>
+                    <input id="profile-area" class="field-input" type="number" min="0" max="250000" step="1" />
+                    <div>
+                      <button class="btn-pill-primary" type="submit">Save Profile</button>
+                    </div>
+                  </form>
+                  <div class="mt-6 pt-6 border-t border-outline-variant/20">
+                    <h3 class="font-headline font-bold text-lg text-on-surface mb-4">Data Health</h3>
+                    <div id="health-list" class="mini-grid"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-8">
+                <!-- Import + Backups -->
+                <div class="bg-surface-container-low rounded-[2rem] p-8">
+                  <p class="eyebrow-label">Portability</p>
+                  <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Import and Backups</h2>
+                  <form id="import-form" class="form-grid">
+                    <label class="field-label" for="import-file">Import Exported JSON</label>
+                    <input id="import-file" class="field-input" type="file" accept=".json,application/json" />
+                    <div>
+                      <button class="btn-pill-primary" type="submit">Import File</button>
+                    </div>
+                  </form>
+                  <p class="compact-helper mt-3">Restore from exported JSON or generated backup files. Google access tokens are intentionally excluded from portable exports.</p>
+                  <div id="backup-list" class="list-stack compact-stack mt-4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Access: Invite Codes, Retry Queue -->
+          <div id="settings-group-access" hidden>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              <div class="space-y-8">
+                <div id="invite-panel" class="bg-surface-container-low rounded-[2rem] p-8" hidden>
+                  <p class="eyebrow-label">Access</p>
+                  <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Invite Codes</h2>
+                  <form id="invite-form" class="form-grid">
+                    <label class="field-label" for="invite-role">Invite Role</label>
+                    <select id="invite-role" class="field-input">
+                      <option value="member">Member</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                    <label class="field-label" for="invite-note">Note</label>
+                    <input id="invite-note" class="field-input" type="text" maxlength="120" placeholder="Optional label for who this invite is for" />
+                    <div>
+                      <button class="btn-pill-primary" type="submit">Create Invite</button>
+                    </div>
+                  </form>
+                  <div id="invite-list" class="list-stack compact-stack mt-4"></div>
+                </div>
+              </div>
+
+              <div class="space-y-8">
+                <!-- Retry Queue -->
+                <div class="bg-surface-container-low rounded-[2rem] p-8">
+                  <div class="flex justify-between items-start mb-6">
+                    <div>
+                      <p class="eyebrow-label">Retry Queue</p>
+                      <h2 class="font-headline font-bold text-2xl text-on-surface">Google Sync Jobs</h2>
+                    </div>
+                    <button id="retry-failed" class="btn-pill-ghost" type="button">Retry Failed</button>
+                  </div>
+                  <div id="queue-list" class="list-stack"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Mobile Dock ── -->
+    <nav class="mobile-dock" aria-label="Mobile navigation">
+      <button class="dock-btn active" data-section-target="overview">
+        <span class="material-symbols-outlined">space_dashboard</span>
+        <span>Home</span>
+      </button>
+      <button class="dock-btn" data-section-target="planner">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <span>Planner</span>
+      </button>
+      <button class="dock-btn" data-section-target="lawn-map">
+        <span class="material-symbols-outlined">map</span>
+        <span>Map</span>
+      </button>
+      <button class="dock-btn" data-section-target="settings">
+        <span class="material-symbols-outlined">cloud_sync</span>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <footer class="py-8 px-6 lg:px-12 text-center bg-surface-container-low">
+      <span class="text-xs text-on-surface-variant font-label">© 2026 Grasspass. All rights reserved.</span>
+    </footer>
+
+    <div id="confirmation-dialog" class="confirmation-overlay" hidden>
+      <div class="confirmation-shell">
+        <div class="confirmation-panel">
+          <h2 id="confirmation-title" class="font-headline font-bold text-xl text-on-surface"></h2>
+          <p id="confirmation-message" class="confirmation-message"></p>
+          <div class="confirmation-actions">
+            <button id="confirmation-cancel" class="btn-pill-ghost" type="button">Cancel</button>
+            <button id="confirmation-confirm" class="btn-pill-primary" type="button">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="auth-overlay" class="auth-overlay" hidden>
+      <div class="auth-card-shell">
+        <div class="auth-card-panel">
+          <p class="eyebrow-label">Grasspass</p>
+          <h2 id="auth-title" class="font-headline font-bold text-3xl text-on-surface">Sign in</h2>
+          <p id="auth-copy" class="compact-helper auth-copy">Sign in to access your lawn workspace.</p>
+          <div id="auth-message" class="auth-message" hidden></div>
+
+          <form id="auth-setup-form" class="form-grid" hidden>
+            <label class="field-label" for="setup-display-name">Display Name</label>
+            <input id="setup-display-name" class="field-input" type="text" maxlength="80" placeholder="Brian" />
+            <label class="field-label" for="setup-email">Email</label>
+            <input id="setup-email" class="field-input" type="email" maxlength="160" placeholder="you@example.com" />
+            <label class="field-label" for="setup-password">Password</label>
+            <input id="setup-password" class="field-input" type="password" maxlength="120" placeholder="At least 8 characters" />
+            <div>
+              <button class="btn-pill-primary" type="submit">Create Admin Account</button>
+            </div>
+          </form>
+
+          <form id="auth-login-form" class="form-grid" hidden>
+            <label class="field-label" for="login-email">Email</label>
+            <input id="login-email" class="field-input" type="email" maxlength="160" placeholder="you@example.com" />
+            <label class="field-label" for="login-password">Password</label>
+            <input id="login-password" class="field-input" type="password" maxlength="120" placeholder="Password" />
+            <div class="button-row">
+              <button class="btn-pill-primary" type="submit">Sign In</button>
+              <button id="show-register" class="btn-pill-ghost" type="button">Use Invite Code</button>
+            </div>
+          </form>
+
+          <form id="auth-register-form" class="form-grid" hidden>
+            <label class="field-label" for="register-display-name">Display Name</label>
+            <input id="register-display-name" class="field-input" type="text" maxlength="80" placeholder="New teammate" />
+            <label class="field-label" for="register-email">Email</label>
+            <input id="register-email" class="field-input" type="email" maxlength="160" placeholder="invitee@example.com" />
+            <label class="field-label" for="register-password">Password</label>
+            <input id="register-password" class="field-input" type="password" maxlength="120" placeholder="At least 8 characters" />
+            <label class="field-label" for="register-invite-code">Invite Code</label>
+            <input id="register-invite-code" class="field-input" type="text" maxlength="80" placeholder="ABC123-DEF456" />
+            <div class="button-row">
+              <button class="btn-pill-primary" type="submit">Register</button>
+              <button id="show-login" class="btn-pill-ghost" type="button">Back to Sign In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

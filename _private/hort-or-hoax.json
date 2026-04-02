@@ -1,0 +1,1605 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": 1,
+      "category": "watering",
+      "claim": "Watering your lawn every day keeps it at its healthiest.",
+      "verdict": "hoax",
+      "explanation": "Daily shallow watering keeps roots close to the surface, making them vulnerable to heat, drought, and foot traffic.",
+      "bestPractice": "Water 2–3 times per week, applying ½–1 inch per session to encourage deep root development."
+    },
+    {
+      "id": 2,
+      "category": "watering",
+      "claim": "Early morning is the best time to water your lawn.",
+      "verdict": "hort",
+      "explanation": "Watering between 4–10am minimizes evaporation and allows blades to dry before nightfall, significantly reducing fungal disease pressure.",
+      "bestPractice": "Target a 5–8am watering window whenever possible."
+    },
+    {
+      "id": 3,
+      "category": "watering",
+      "claim": "Evening watering is harmless if mornings aren't convenient.",
+      "verdict": "hoax",
+      "explanation": "Wet foliage overnight creates ideal conditions for fungal pathogens like dollar spot and brown patch.",
+      "bestPractice": "If morning irrigation isn't possible, midday is preferable to evening."
+    },
+    {
+      "id": 4,
+      "category": "watering",
+      "claim": "Established lawns typically need about 1 inch of water per week including rainfall.",
+      "verdict": "hort",
+      "explanation": "This benchmark applies to most cool-season and warm-season grasses in temperate climates, accounting for evapotranspiration rates.",
+      "bestPractice": "Use a rain gauge to track natural precipitation before supplementing with irrigation."
+    },
+    {
+      "id": 5,
+      "category": "watering",
+      "claim": "If your grass turns yellow, it always needs more water.",
+      "verdict": "hoax",
+      "explanation": "Yellowing can indicate overwatering, nutrient deficiency, compaction, disease, or drought — not automatically underwatering.",
+      "bestPractice": "Check soil moisture with a screwdriver or probe before watering yellow turf."
+    },
+    {
+      "id": 6,
+      "category": "watering",
+      "claim": "Deep, infrequent watering builds drought tolerance in grass.",
+      "verdict": "hort",
+      "explanation": "Long, separated watering cycles train roots to grow deeper in pursuit of moisture, improving resilience during dry spells.",
+      "bestPractice": "Moisten the top 6–8 inches of soil, then wait until the top 3 inches dry before watering again."
+    },
+    {
+      "id": 7,
+      "category": "watering",
+      "claim": "You can't overwater a lawn as long as the soil drains well.",
+      "verdict": "hoax",
+      "explanation": "Overwatering leaches nutrients, promotes thatch, encourages shallow rooting, and creates disease-favorable conditions even in well-draining soils.",
+      "bestPractice": "Always check soil moisture before each watering cycle, regardless of drainage quality."
+    },
+    {
+      "id": 8,
+      "category": "watering",
+      "claim": "A screwdriver test is a reliable way to check soil moisture before watering.",
+      "verdict": "hort",
+      "explanation": "If a 6-inch screwdriver slides easily into the lawn, moisture is adequate. Resistance indicates the lawn needs water.",
+      "bestPractice": "Use the screwdriver test before running your irrigation system to avoid unnecessary watering."
+    },
+    {
+      "id": 9,
+      "category": "watering",
+      "claim": "Sprinkler systems guarantee you're applying the right amount of water.",
+      "verdict": "hoax",
+      "explanation": "Sprinklers apply water uniformly regardless of weather. Without a smart controller or rain sensor, they routinely overwater after rainfall.",
+      "bestPractice": "Install a rain sensor or smart controller that adjusts scheduling based on local weather conditions."
+    },
+    {
+      "id": 10,
+      "category": "watering",
+      "claim": "Sloped areas should be watered in short cycle-and-soak intervals.",
+      "verdict": "hort",
+      "explanation": "Water applied to hillsides runs off before infiltrating the soil. Multiple short cycles allow absorption between passes.",
+      "bestPractice": "Program multiple 5–7 minute cycles with rest periods on sloped irrigation zones."
+    },
+    {
+      "id": 11,
+      "category": "watering",
+      "claim": "Watering in bright sunshine scorches grass blades.",
+      "verdict": "hoax",
+      "explanation": "Sunlit water droplets do not act as magnifying glasses under typical field conditions. Midday watering is inefficient due to evaporation, but does not burn grass.",
+      "bestPractice": "Avoid midday irrigation for efficiency, not for burn prevention."
+    },
+    {
+      "id": 12,
+      "category": "watering",
+      "claim": "Drought-dormant brown grass can still be kept alive with minimal watering.",
+      "verdict": "hort",
+      "explanation": "Brown drought-dormant lawns are surviving, not dead. A deep watering every 2–3 weeks prevents crown death during extended dry periods.",
+      "bestPractice": "Water dormant turf every 2–3 weeks with ½ inch to protect crowns through dormancy."
+    },
+    {
+      "id": 13,
+      "category": "watering",
+      "claim": "Sandy and clay soils should be watered on the same schedule.",
+      "verdict": "hoax",
+      "explanation": "Sandy soils drain rapidly; water passes quickly out of the root zone. Clay soils hold water longer but drain slowly.",
+      "bestPractice": "Water sandy soils more frequently in smaller volumes; clay soils less often with more time between cycles."
+    },
+    {
+      "id": 14,
+      "category": "watering",
+      "claim": "Afternoon wilt doesn't always mean the lawn needs watering.",
+      "verdict": "hort",
+      "explanation": "Many grasses wilt slightly during peak afternoon heat even with adequate soil moisture due to high transpiration rates exceeding water uptake.",
+      "bestPractice": "Check for wilt again in the cooler morning. If it persists, then water."
+    },
+    {
+      "id": 15,
+      "category": "watering",
+      "claim": "A completely brown lawn in July is dead.",
+      "verdict": "hoax",
+      "explanation": "Most well-established lawns enter summer dormancy and remain viable. Crowns typically survive up to 4–6 weeks of drought dormancy.",
+      "bestPractice": "Wait for fall rains or resume irrigation. Dormant lawn crowns are alive even when fully brown."
+    },
+    {
+      "id": 16,
+      "category": "watering",
+      "claim": "Irrigation should be reduced in fall as temperatures drop.",
+      "verdict": "hort",
+      "explanation": "Cool weather slows evapotranspiration; continued summer irrigation rates cause soft turf and promote disease in fall.",
+      "bestPractice": "Reduce irrigation frequency by 30–50% as daytime temperatures drop below 60°F."
+    },
+    {
+      "id": 17,
+      "category": "watering",
+      "claim": "Newly seeded areas need less water than established lawns.",
+      "verdict": "hoax",
+      "explanation": "Seeds and shallow-rooted seedlings cannot tolerate drought. They require frequent light watering to prevent drying out during germination.",
+      "bestPractice": "Water new seed 2–3 times daily in small amounts, keeping the top ¼–½ inch consistently moist until germination."
+    },
+    {
+      "id": 18,
+      "category": "watering",
+      "claim": "Distribution uniformity of a sprinkler system is as important as total water applied.",
+      "verdict": "hort",
+      "explanation": "Uneven coverage creates alternating dry and soggy patches regardless of how much total water is applied across the zone.",
+      "bestPractice": "Perform a catch-can (tuna can) test to measure distribution uniformity and adjust head spacing and angles."
+    },
+    {
+      "id": 19,
+      "category": "watering",
+      "claim": "Greywater from sinks is always safe to use on lawns.",
+      "verdict": "hoax",
+      "explanation": "Greywater may contain soaps, chemicals, and pathogens that harm turf or soil biology over time, and regulations restrict its use in many areas.",
+      "bestPractice": "Use only biodegradable soaps if reusing greywater; check local regulations and never apply to edible plants."
+    },
+    {
+      "id": 20,
+      "category": "watering",
+      "claim": "Applying water before forecast rain of 0.5 inches or more is always wasteful.",
+      "verdict": "hoax",
+      "explanation": "Forecast accuracy varies; weather events often miss or underperform. However, checking a 24-hour window is a reasonable water-conservation strategy.",
+      "bestPractice": "Skip irrigation only when 0.5 inches or more of rain is likely within 24 hours; rely on a rain sensor for automatic scheduling."
+    },
+    {
+      "id": 21,
+      "category": "mowing",
+      "claim": "Cutting grass as short as possible means you must mow less often.",
+      "verdict": "hoax",
+      "explanation": "Scalping weakens turf by drastically reducing photosynthetic area, depleting carbohydrate reserves and inviting weeds and disease — requiring more inputs to recover.",
+      "bestPractice": "Follow the one-third rule: never remove more than ⅓ of the blade height in a single mowing."
+    },
+    {
+      "id": 22,
+      "category": "mowing",
+      "claim": "Mowing height is one of the most impactful factors in lawn health.",
+      "verdict": "hort",
+      "explanation": "Taller grass shades soil to suppress weeds, retains more moisture, supports deeper roots, and produces more photosynthate for plant energy.",
+      "bestPractice": "Keep cool-season grasses at 3–4 inches and warm-season grasses at 1.5–3 inches according to species recommendations."
+    },
+    {
+      "id": 23,
+      "category": "mowing",
+      "claim": "Grass clippings are the primary cause of thatch buildup.",
+      "verdict": "hoax",
+      "explanation": "Clippings are 80–85% water and decompose within days. Thatch is composed of roots, crowns, and stems — not clippings.",
+      "bestPractice": "Mulch clippings back into the lawn freely; the nitrogen they return is a free nutrient input."
+    },
+    {
+      "id": 24,
+      "category": "mowing",
+      "claim": "Sharp mower blades produce cleaner cuts and healthier turf.",
+      "verdict": "hort",
+      "explanation": "Dull blades shred grass, creating ragged edges that lose moisture rapidly and provide an easy entry point for pathogens.",
+      "bestPractice": "Sharpen mower blades at least once per season or every 20–25 hours of use."
+    },
+    {
+      "id": 25,
+      "category": "mowing",
+      "claim": "Mowing in the same direction every time is the most efficient pattern.",
+      "verdict": "hoax",
+      "explanation": "Repeatedly mowing in the same direction compacts soil into ruts and pushes grass blades to lean persistently in one direction.",
+      "bestPractice": "Alternate mowing direction — horizontal, diagonal, and vertical — each session for even wear and upright growth."
+    },
+    {
+      "id": 26,
+      "category": "mowing",
+      "claim": "The one-third rule prevents turf stress after mowing.",
+      "verdict": "hort",
+      "explanation": "Removing more than ⅓ of the grass blade forces the plant to use stored root carbohydrates for recovery, weakening the entire plant.",
+      "bestPractice": "If grass gets overly long, mow in multiple passes spaced several days apart rather than cutting deeply all at once."
+    },
+    {
+      "id": 27,
+      "category": "mowing",
+      "claim": "Wet grass is only a mowing hazard because of slip risk.",
+      "verdict": "hoax",
+      "explanation": "Wet grass also clumps heavily, clogs mower decks, sticks to surfaces, and creates uneven cuts that can promote fungal disease.",
+      "bestPractice": "Wait until grass is fully dry before mowing for cut quality, equipment longevity, and turf health."
+    },
+    {
+      "id": 28,
+      "category": "mowing",
+      "claim": "Scalping warm-season grasses in early spring stimulates green-up.",
+      "verdict": "hort",
+      "explanation": "A light scalp of dormant Bermuda or Zoysia removes dead material and allows light to reach the crowns, accelerating spring green-up.",
+      "bestPractice": "Scalp warm-season lawns just before green-up begins; never scalp cool-season grasses."
+    },
+    {
+      "id": 29,
+      "category": "mowing",
+      "claim": "Mowing during heat stress should be done at a higher setting.",
+      "verdict": "hort",
+      "explanation": "Extra blade length during drought or extreme heat shades soil, reduces evapotranspiration, and protects crowns from heat injury.",
+      "bestPractice": "Raise the cutting height by ½–1 inch during heat events and drought stress periods."
+    },
+    {
+      "id": 30,
+      "category": "mowing",
+      "claim": "Riding mowers cause less soil compaction than push mowers.",
+      "verdict": "hoax",
+      "explanation": "Riding mowers are significantly heavier and compact soil more, especially when operated on wet or soft ground.",
+      "bestPractice": "Avoid mowing when soil is saturated; use the lightest-appropriate equipment during soft conditions."
+    },
+    {
+      "id": 31,
+      "category": "mowing",
+      "claim": "Mulching mowers return nitrogen back to the lawn.",
+      "verdict": "hort",
+      "explanation": "Mulching blades cut clippings into fine particles that decompose quickly, returning nitrogen, potassium, and organic matter to the soil.",
+      "bestPractice": "Use a mulching blade and mulch-mow throughout the season as a free nutrient supplement."
+    },
+    {
+      "id": 32,
+      "category": "mowing",
+      "claim": "Mowing crabgrass regularly will eventually kill it.",
+      "verdict": "hoax",
+      "explanation": "Crabgrass is an annual weed that sets seed before frost. Mowing spreads seeds and stimulates tillering, making it worse.",
+      "bestPractice": "Use pre-emergent herbicides in spring and hand-pull plants before they set seed."
+    },
+    {
+      "id": 33,
+      "category": "mowing",
+      "claim": "The last fall mow should leave grass as tall as possible for winter crown protection.",
+      "verdict": "hoax",
+      "explanation": "Overly tall grass mats under snow, creating ideal conditions for snow mold and other winter fungal diseases.",
+      "bestPractice": "Drop the mowing height by ½ inch for the last 1–2 mowings of fall, leaving turf at approximately 2.5 inches."
+    },
+    {
+      "id": 34,
+      "category": "mowing",
+      "claim": "Mowing frequency matters more than mowing height for lawn appearance.",
+      "verdict": "hort",
+      "explanation": "A lawn mowed frequently at moderate height consistently outperforms one mowed low or mowed infrequently.",
+      "bestPractice": "Mow at a consistent frequency during the growing season rather than waiting until grass is excessively long."
+    },
+    {
+      "id": 35,
+      "category": "mowing",
+      "claim": "Edging is purely an aesthetic practice with no functional benefit.",
+      "verdict": "hoax",
+      "explanation": "Edging prevents grass rhizomes and stolons from creeping into flower beds, hardscape, and landscape areas.",
+      "bestPractice": "Edge beds and walks every 2–4 weeks to prevent rhizome invasion that becomes difficult to reclaim later."
+    },
+    {
+      "id": 36,
+      "category": "mowing",
+      "claim": "Mowing with dull blades increases lawn susceptibility to disease.",
+      "verdict": "hort",
+      "explanation": "Ragged mow cuts increase surface area for pathogen entry and moisture loss, raising disease pressure noticeably.",
+      "bestPractice": "Inspect blade sharpness at the start of each season; a filed edge is acceptable between full sharpenings."
+    },
+    {
+      "id": 37,
+      "category": "mowing",
+      "claim": "Grass height affects how deeply roots grow.",
+      "verdict": "hort",
+      "explanation": "Root depth is roughly proportional to blade height — taller mowing promotes proportionally deeper root development.",
+      "bestPractice": "Maintain height at 3–3.5 inches for most bluegrass and fescue varieties to support a deep root system."
+    },
+    {
+      "id": 38,
+      "category": "mowing",
+      "claim": "Mowing can spread fungal diseases across a lawn.",
+      "verdict": "hort",
+      "explanation": "Mower blades physically transport fungal spores from diseased areas to healthy ones, rapidly expanding small infection sites.",
+      "bestPractice": "Disinfect mower blades with a 10% bleach solution or isopropyl alcohol when disease is present in the lawn."
+    },
+    {
+      "id": 39,
+      "category": "mowing",
+      "claim": "Clippings should always be bagged after a fertilizer application.",
+      "verdict": "hoax",
+      "explanation": "Clippings after fertilizing contain valuable nutrients. Bagging them removes a portion of the nitrogen you just applied.",
+      "bestPractice": "Mulch clippings post-fertilizer; the nutrients held in blade tissue are released back as clippings decompose."
+    },
+    {
+      "id": 40,
+      "category": "mowing",
+      "claim": "Stripe patterns on lawns require a special striping mower attachment.",
+      "verdict": "hoax",
+      "explanation": "Stripe patterns are a visual effect created by bending grass in alternating directions with any mower's rear roller or deflector.",
+      "bestPractice": "Alternate mowing direction each pass; a simple lawn roller attachment creates crisp visible stripes."
+    },
+    {
+      "id": 41,
+      "category": "mowing",
+      "claim": "Side-discharge mowing always leaves unsightly clumps.",
+      "verdict": "hoax",
+      "explanation": "Clumps result from wet or overly long grass, not the discharge mode itself. Dry grass at a proper height mows cleanly regardless of discharge direction.",
+      "bestPractice": "Mow in dry conditions on a regular schedule to prevent clumping regardless of the discharge setting used."
+    },
+    {
+      "id": 42,
+      "category": "mowing",
+      "claim": "Allowing grass to grow slightly taller through summer delays the need for irrigation.",
+      "verdict": "hort",
+      "explanation": "Every additional inch of blade height reduces soil temperature and water loss through shade and reduced evapotranspiration.",
+      "bestPractice": "Raise the deck in summer; lower it slightly for the final fall mow to reduce snow matting risk."
+    },
+    {
+      "id": 43,
+      "category": "mowing",
+      "claim": "Robotic mowers reduce compaction compared to conventional weekly mowing.",
+      "verdict": "hort",
+      "explanation": "Daily light mowing distributes equipment weight across many varied paths rather than repeating the same heavy pass weekly.",
+      "bestPractice": "Program robotic mowers to avoid wet conditions; adjust height seasonally to match recommended turf heights."
+    },
+    {
+      "id": 44,
+      "category": "mowing",
+      "claim": "Mulch mowing can reduce the need for fertilizer applications.",
+      "verdict": "hort",
+      "explanation": "Consistent mulch-mowing can return up to 1 lb/1000 sq ft of nitrogen per year, replacing one full fertilizer application.",
+      "bestPractice": "Factor clipping-return into your annual fertilization budget and reduce synthetic nitrogen rate accordingly."
+    },
+    {
+      "id": 45,
+      "category": "mowing",
+      "claim": "Grass only needs mowing in spring and summer.",
+      "verdict": "hoax",
+      "explanation": "Cool-season grasses continue growing into mid-November and resume in February–March. Warm-season grasses may need fall trims in mild climates.",
+      "bestPractice": "Mow whenever growth exceeds the upper range for your target height, including fall and early spring sessions."
+    },
+    {
+      "id": 46,
+      "category": "fertilizing",
+      "claim": "Soil testing is the most reliable way to determine fertilizer needs.",
+      "verdict": "hort",
+      "explanation": "A soil test eliminates guesswork, preventing costly over- and under-application of nutrients and identifying true deficiencies.",
+      "bestPractice": "Test soil every 2–3 years through a cooperative extension lab; apply nutrients based on the report's recommendations."
+    },
+    {
+      "id": 47,
+      "category": "fertilizing",
+      "claim": "More fertilizer always means greener, healthier grass.",
+      "verdict": "hoax",
+      "explanation": "Over-fertilizing causes rapid weak growth, increases disease and thatch, risks burning grass, and pollutes waterways through leaching and runoff.",
+      "bestPractice": "Apply the recommended nitrogen rate — typically 0.5–1.0 lb N/1000 sq ft per application at 4–6 week intervals."
+    },
+    {
+      "id": 48,
+      "category": "fertilizing",
+      "claim": "Slow-release nitrogen fertilizers produce better sustained lawn health than quick-release.",
+      "verdict": "hort",
+      "explanation": "Slow-release formulations feed grass over 8–12 weeks, reducing surge growth, burn risk, and nitrogen leaching into groundwater.",
+      "bestPractice": "Choose fertilizers where at least 50% of nitrogen is from slow-release sources such as IBDU, WIN, or polymer-coated urea."
+    },
+    {
+      "id": 49,
+      "category": "fertilizing",
+      "claim": "Fall is the most important fertilization window for cool-season grasses.",
+      "verdict": "hort",
+      "explanation": "Fall nitrogen builds root carbohydrate reserves that fuel powerful spring green-up — the most impactful single application timing for turf.",
+      "bestPractice": "Apply 1.0 lb N/1000 sq ft in October; a second 'winterizer' application in November further boosts spring performance."
+    },
+    {
+      "id": 50,
+      "category": "fertilizing",
+      "claim": "Applying fertilizer right before heavy rain helps it soak in quickly.",
+      "verdict": "hoax",
+      "explanation": "Heavy rain immediately after application washes nutrients into storm drains and waterways before the lawn can absorb them.",
+      "bestPractice": "Apply before 0.1–0.25 inches of light predicted rainfall; avoid applications within 24 hours of a heavy rain event."
+    },
+    {
+      "id": 51,
+      "category": "fertilizing",
+      "claim": "Phosphorus applications should be skipped unless a soil test shows a deficiency.",
+      "verdict": "hort",
+      "explanation": "Phosphorus runoff is the primary driver of aquatic eutrophication. Many states restrict lawn phosphorus applications for this reason.",
+      "bestPractice": "Apply phosphorus only when a soil test shows levels below 20 ppm Mehlich-3. Skip it in routine maintenance programs."
+    },
+    {
+      "id": 52,
+      "category": "fertilizing",
+      "claim": "Iron applications make grass greener without stimulating excessive growth.",
+      "verdict": "hort",
+      "explanation": "Iron activates chlorophyll synthesis, producing a deep green color without the surge growth or leaching risk of nitrogen.",
+      "bestPractice": "Apply chelated iron or ferrous sulfate at 0.5–2 oz/1000 sq ft for color when nitrogen is not needed."
+    },
+    {
+      "id": 53,
+      "category": "fertilizing",
+      "claim": "All grass types benefit from the same fertilization schedule.",
+      "verdict": "hoax",
+      "explanation": "Cool-season and warm-season grasses have opposite active growth periods. The same schedule can damage one while benefiting the other.",
+      "bestPractice": "Fertilize cool-season grasses in fall and cool spring; fertilize warm-season grasses in late spring through summer only."
+    },
+    {
+      "id": 54,
+      "category": "fertilizing",
+      "claim": "Fertilizing dormant or drought-stressed turf is wasteful and potentially harmful.",
+      "verdict": "hort",
+      "explanation": "Fertilizing grass that isn't actively growing results in nutrient leaching and potentially burns an already-stressed plant.",
+      "bestPractice": "Never fertilize dormant warm-season or drought-stressed cool-season turf; wait for active growth to resume."
+    },
+    {
+      "id": 55,
+      "category": "fertilizing",
+      "claim": "You can apply double the rate of fertilizer to save application trips.",
+      "verdict": "hoax",
+      "explanation": "High single-rate applications burn grass, force excessive top growth, accelerate thatch, and increase nutrient runoff.",
+      "bestPractice": "Split applications at recommended rates; do not try to accelerate the program by doubling rates."
+    },
+    {
+      "id": 56,
+      "category": "fertilizing",
+      "claim": "Coffee grounds can replace fertilizer as a nitrogen source.",
+      "verdict": "hoax",
+      "explanation": "Coffee grounds contain nitrogen, but it releases extremely slowly and their acidifying effect can shift soil pH unfavorably over time.",
+      "bestPractice": "Use coffee grounds as a minor compost ingredient; do not rely on them as a standalone fertilizer replacement."
+    },
+    {
+      "id": 57,
+      "category": "fertilizing",
+      "claim": "Organic fertilizers improve soil biological activity over time.",
+      "verdict": "hort",
+      "explanation": "Organic fertilizers feed soil microbes, which cycle nutrients, improve soil structure, and create a more self-sustaining growing environment.",
+      "bestPractice": "Incorporate 30–50% of your annual nitrogen budget from organic sources such as compost, Milorganite, or feather meal."
+    },
+    {
+      "id": 58,
+      "category": "fertilizing",
+      "claim": "Weed-and-feed products can be applied any time of the growing season.",
+      "verdict": "hoax",
+      "explanation": "Weed-and-feed products require active weed growth and warmer soil temperatures to be effective. Applied off-schedule, they waste herbicide and can risk turf damage.",
+      "bestPractice": "Apply weed-and-feed products when weeds are actively growing (spring) and soil temperature is consistently above 55°F."
+    },
+    {
+      "id": 59,
+      "category": "fertilizing",
+      "claim": "Fertilizing in fall after the first frost is pointless.",
+      "verdict": "hoax",
+      "explanation": "Grass roots remain metabolically active well below the air temperatures that stop top growth. Fall fertilizer is stored in root tissue for spring energy.",
+      "bestPractice": "Apply winterizer fertilizer until the ground truly freezes, typically November in most northern climates."
+    },
+    {
+      "id": 60,
+      "category": "fertilizing",
+      "claim": "Soil pH testing is as important as nutrient level testing.",
+      "verdict": "hort",
+      "explanation": "pH controls the chemical availability of all nutrients regardless of how much is physically present in the soil.",
+      "bestPractice": "Maintain pH between 6.0–7.0 for most turfgrasses; adjust with lime (raise) or sulfur (lower) based on soil test results."
+    },
+    {
+      "id": 61,
+      "category": "fertilizing",
+      "claim": "Fertilizing newly laid sod immediately accelerates its establishment.",
+      "verdict": "hoax",
+      "explanation": "Newly laid sod needs firm soil contact and initial rooting before fertilizing. Premature applications cause root-tip burn on unestablished roots.",
+      "bestPractice": "Wait 4–6 weeks after sod installation before the first fertilizer application."
+    },
+    {
+      "id": 62,
+      "category": "fertilizing",
+      "claim": "Potassium improves drought and cold tolerance in grass.",
+      "verdict": "hort",
+      "explanation": "Potassium regulates cellular water uptake and strengthens cell walls, directly improving stress resistance in turf.",
+      "bestPractice": "Include potassium in fall fertilizations, especially where a soil test shows K levels below 120 ppm."
+    },
+    {
+      "id": 63,
+      "category": "fertilizing",
+      "claim": "Spreading fertilizer by hand is just as accurate as using a spreader.",
+      "verdict": "hoax",
+      "explanation": "Hand broadcast results in highly uneven coverage with streak lines, hot spots, and bare gaps — all visible in turf response within days.",
+      "bestPractice": "Use a calibrated rotary or drop spreader and match the manufacturer's product settings for uniform coverage."
+    },
+    {
+      "id": 64,
+      "category": "fertilizing",
+      "claim": "Liquid fertilizers always outperform granular ones.",
+      "verdict": "hoax",
+      "explanation": "Both forms can achieve equal results. The choice depends on application precision, cost, equipment, and convenience.",
+      "bestPractice": "Use granular for large areas; liquid is excellent for spot treatments and small precision applications."
+    },
+    {
+      "id": 65,
+      "category": "fertilizing",
+      "claim": "Fertilizing the lawn during high summer heat is best avoided.",
+      "verdict": "hort",
+      "explanation": "High summer nitrogen causes volatilization loss, burn risk, and growth surges during heat-stressed or dormant periods.",
+      "bestPractice": "Avoid nitrogen applications when temperatures consistently exceed 85°F; use iron for a color boost instead."
+    },
+    {
+      "id": 66,
+      "category": "fertilizing",
+      "claim": "A late-season winterizer fertilizer significantly improves spring green-up.",
+      "verdict": "hort",
+      "explanation": "Nitrogen stored in crowns and roots over winter fuels early spring growth before photosynthesis is fully active.",
+      "bestPractice": "Apply 0.5–0.75 lb N/1000 sq ft with slow-release nitrogen in October–November for cool-season turf."
+    },
+    {
+      "id": 67,
+      "category": "fertilizing",
+      "claim": "Micronutrients like manganese and zinc are regularly needed in supplemental fertilization.",
+      "verdict": "hoax",
+      "explanation": "Most soils contain adequate micronutrients for turfgrass. Unsolicited micronutrient applications can create toxic imbalances.",
+      "bestPractice": "Apply micronutrients only for confirmed deficiencies identified through soil testing."
+    },
+    {
+      "id": 68,
+      "category": "fertilizing",
+      "claim": "Applying lime immediately fixes low soil pH.",
+      "verdict": "hoax",
+      "explanation": "Even fast-acting lime products require 3–6 months to fully change pH through the root zone as they dissolve and diffuse through soil.",
+      "bestPractice": "Apply lime in fall for spring improvement. Follow soil test rates to avoid overcorrection and calcium accumulation."
+    },
+    {
+      "id": 69,
+      "category": "fertilizing",
+      "claim": "The interval between fertilizer applications should be tied to the product's release rate.",
+      "verdict": "hort",
+      "explanation": "Fast-release products are reapplied every 4–6 weeks; slow-release products sustain for up to 8–12 weeks.",
+      "bestPractice": "Match your re-application interval to the product's stated nitrogen release window rather than a fixed calendar."
+    },
+    {
+      "id": 70,
+      "category": "fertilizing",
+      "claim": "Natural 'all-organic' fertilizers are always slow-release.",
+      "verdict": "hoax",
+      "explanation": "Some organic fertilizers, including blood meal and fish emulsion, release nitrogen quickly and can burn or surge growth if over-applied.",
+      "bestPractice": "Check organic fertilizer labels for N-P-K content and recommended rates; organic does not automatically mean gentle or slow."
+    },
+    {
+      "id": 71,
+      "category": "seeding",
+      "claim": "Fall is the best time to seed cool-season lawns.",
+      "verdict": "hort",
+      "explanation": "Warm soil, cooling air temperatures, and dramatically reduced weed competition make fall seeding the most successful window for cool-season species.",
+      "bestPractice": "Seed Kentucky bluegrass, tall fescue, and perennial ryegrass between late August and early October."
+    },
+    {
+      "id": 72,
+      "category": "seeding",
+      "claim": "Grass seed needs to be covered with soil to germinate successfully.",
+      "verdict": "hoax",
+      "explanation": "Most turfgrass seeds are tiny and germinate best with light surface contact, not deep burial. Burying deeply reduces germination significantly.",
+      "bestPractice": "Rake seed lightly into the top ¼ inch; use a slit-seeder or hand rake for good soil-to-seed contact without deep burial."
+    },
+    {
+      "id": 73,
+      "category": "seeding",
+      "claim": "Selecting locally adapted grass varieties dramatically improves long-term success.",
+      "verdict": "hort",
+      "explanation": "Locally bred cultivars are selected for regional climate stresses, disease resistance, and performance in local soil types.",
+      "bestPractice": "Choose cultivars from the National Turfgrass Evaluation Program (NTEP) rated for your region and intended use."
+    },
+    {
+      "id": 74,
+      "category": "seeding",
+      "claim": "Grass seed remains fully viable indefinitely if stored in a cool place.",
+      "verdict": "hoax",
+      "explanation": "Germination viability declines over time even with the best storage. Seed older than 2 years may germinate poorly and waste effort.",
+      "bestPractice": "Use fresh seed each season; check the germination percentage on the bag label and aim for 85%+."
+    },
+    {
+      "id": 75,
+      "category": "seeding",
+      "claim": "Overseeding after core aerification dramatically improves germination rates.",
+      "verdict": "hort",
+      "explanation": "Aeration holes provide soil contact, moisture retention, and protection from birds and wind for new seed — all critical for germination.",
+      "bestPractice": "Overseed within 24–48 hours of aerification to maximize the benefit of open cores."
+    },
+    {
+      "id": 76,
+      "category": "seeding",
+      "claim": "Grass seed can be spread over existing turf without any preparation.",
+      "verdict": "hoax",
+      "explanation": "New seed struggles to penetrate dense existing turf without soil contact, resulting in poor germination regardless of seed quality.",
+      "bestPractice": "Verticut, dethatch, or core aerate before overseeding to create surface contact points for seed."
+    },
+    {
+      "id": 77,
+      "category": "seeding",
+      "claim": "Soil temperature, not air temperature, determines seed germination timing.",
+      "verdict": "hort",
+      "explanation": "Grass seeds respond to soil temperature at the germination zone (top ½ inch), not to ambient air temperature readings.",
+      "bestPractice": "Use a soil thermometer; cool-season grasses germinate best when surface soil temp is consistently 50–65°F."
+    },
+    {
+      "id": 78,
+      "category": "seeding",
+      "claim": "One deep watering after seeding is enough to establish a new lawn.",
+      "verdict": "hoax",
+      "explanation": "Germinating seedlings cannot tolerate any period of drying out. A single watering is insufficient for successful establishment.",
+      "bestPractice": "Water 2–3 times daily in small amounts for the first 3–4 weeks, keeping the seed bed consistently moist."
+    },
+    {
+      "id": 79,
+      "category": "seeding",
+      "claim": "Straw mulch over freshly seeded areas improves germination success.",
+      "verdict": "hort",
+      "explanation": "A thin straw cover reduces moisture loss from the seed bed and moderates soil temperature swings during germination.",
+      "bestPractice": "Apply weed-free straw at 1 bale/1000 sq ft; keep it thin enough that 50–75% of soil is still visible."
+    },
+    {
+      "id": 80,
+      "category": "seeding",
+      "claim": "Grass seed germinates in the same number of days regardless of temperature.",
+      "verdict": "hoax",
+      "explanation": "Germination speed is strongly linked to temperature. Cool-season grasses may take 5 days at 68°F but 28+ days at 45°F.",
+      "bestPractice": "Compensate for late-season seeding with increased seed rates and extend watering duration to account for slow germination."
+    },
+    {
+      "id": 81,
+      "category": "seeding",
+      "claim": "Starter fertilizer high in phosphorus improves seedling establishment.",
+      "verdict": "hort",
+      "explanation": "Phosphorus promotes root development specifically in seedlings, giving new grass a strong early root system.",
+      "bestPractice": "Apply a starter fertilizer such as 18-24-12 at seeding time when establishing new turf."
+    },
+    {
+      "id": 82,
+      "category": "seeding",
+      "claim": "You can mow a newly seeded lawn as soon as it looks green.",
+      "verdict": "hoax",
+      "explanation": "The crown and root system need substantial time to anchor before the physical and stress demands of mowing.",
+      "bestPractice": "Wait to mow until seedlings reach 3–4 inches and have been growing for at least 4–6 weeks post-germination."
+    },
+    {
+      "id": 83,
+      "category": "seeding",
+      "claim": "Dormant seeding in late fall can give cool-season grass a spring head start.",
+      "verdict": "hort",
+      "explanation": "Seed scattered after soil temps drop below 40°F lies dormant through winter and germinates at the optimal moment in early spring.",
+      "bestPractice": "Apply seed in late November after soil cools; use straight-species seed rather than blends for dormant seeding."
+    },
+    {
+      "id": 84,
+      "category": "seeding",
+      "claim": "All grass seed mixes are interchangeable for any lawn situation.",
+      "verdict": "hoax",
+      "explanation": "Shade mixes, high-traffic blends, drought-tolerant mixes, and sun mixes are formulated with entirely different species ratios.",
+      "bestPractice": "Match seed mix to site conditions: sun exposure, shade level, traffic, and soil drainage type."
+    },
+    {
+      "id": 85,
+      "category": "seeding",
+      "claim": "Using more seed than recommended always produces a thicker lawn.",
+      "verdict": "hoax",
+      "explanation": "Dense overseeding causes seedling competition, resulting in weaker individual plants and elevated disease problems.",
+      "bestPractice": "Follow label rates precisely; cool-season species typically range from 3–8 lbs/1000 sq ft depending on species."
+    },
+    {
+      "id": 86,
+      "category": "seeding",
+      "claim": "Annual ryegrass makes a poor overseeding choice for permanent turf.",
+      "verdict": "hort",
+      "explanation": "Annual rye dies in summer heat, leaving bare gaps; it also competes aggressively with the desired permanent stand during its growth period.",
+      "bestPractice": "Use perennial ryegrass or turf-type tall fescue for permanent overseeding; they persist and blend naturally."
+    },
+    {
+      "id": 87,
+      "category": "seeding",
+      "claim": "Weed control can resume immediately after seeding.",
+      "verdict": "hoax",
+      "explanation": "Most pre-emergent and post-emergent herbicides are phytotoxic to germinating seedlings with very few exceptions.",
+      "bestPractice": "Wait until the new turf has been mowed at least 3 times before applying any herbicide."
+    },
+    {
+      "id": 88,
+      "category": "seeding",
+      "claim": "Hydroseeding is only practical for large commercial applications.",
+      "verdict": "hoax",
+      "explanation": "Homeowner hydroseed kits are widely available and work exceptionally well on slopes, large areas, and erosion-prone sites.",
+      "bestPractice": "Consider hydroseed for difficult terrain; it provides excellent seed-to-soil contact and moisture retention."
+    },
+    {
+      "id": 89,
+      "category": "seeding",
+      "claim": "Mixing fast and slow germinating species in a blend produces more even establishment.",
+      "verdict": "hort",
+      "explanation": "Perennial ryegrass germinates in 5–7 days and provides protective cover for slow-germinating Kentucky bluegrass, which takes 14–28 days.",
+      "bestPractice": "Fescue/bluegrass/ryegrass blends are commercially designed specifically to leverage this complementary timing."
+    },
+    {
+      "id": 90,
+      "category": "seeding",
+      "claim": "Seed labelled 'Instant Lawn' germinates overnight.",
+      "verdict": "hoax",
+      "explanation": "No turfgrass seed germinates in under 4–5 days under optimal conditions. 'Instant' is a marketing term, not a botanical fact.",
+      "bestPractice": "Plan for 7–21 days to germination for most cool-season grasses and set realistic expectations for establishment."
+    },
+    {
+      "id": 91,
+      "category": "soil",
+      "claim": "Soil pH between 6.0 and 7.0 is optimal for most turfgrasses.",
+      "verdict": "hort",
+      "explanation": "This pH range maximizes availability of macro and micronutrients and supports the full spectrum of beneficial soil microbial activity.",
+      "bestPractice": "Test soil pH every 2–3 years and amend with ground limestone (raise) or sulfur (lower) based on test results."
+    },
+    {
+      "id": 92,
+      "category": "soil",
+      "claim": "Adding sand to clay soil always improves drainage.",
+      "verdict": "hoax",
+      "explanation": "Adding small amounts of sand to clay creates a concrete-like structure that often worsens drainage and increases rigidity.",
+      "bestPractice": "To improve clay drainage, core aerate and topdress with compost. Only add sand in large enough volumes to structurally change the mix (above 50% by volume)."
+    },
+    {
+      "id": 93,
+      "category": "soil",
+      "claim": "Organic matter in the top 6 inches of soil is the most critical factor in soil quality.",
+      "verdict": "hort",
+      "explanation": "Organic matter simultaneously improves water retention, drainage, aeration, nutrient-holding capacity, and microbial activity.",
+      "bestPractice": "Apply ¼–½ inch of fine compost topdressing annually to slowly increase organic matter over 3–5 years."
+    },
+    {
+      "id": 94,
+      "category": "soil",
+      "claim": "Soil color tells you everything you need to know about soil quality.",
+      "verdict": "hoax",
+      "explanation": "While dark soil often has high organic matter, color is also influenced by mineral composition, moisture level, and iron content — not quality alone.",
+      "bestPractice": "Use a soil test to determine nutrient levels, pH, and organic matter percentage rather than relying on visual cues."
+    },
+    {
+      "id": 95,
+      "category": "soil",
+      "claim": "Compaction is the most common reason lawns fail to respond to other inputs.",
+      "verdict": "hort",
+      "explanation": "Compacted soil limits oxygen, water, and root penetration. Fertilizer and water are wasted on compacted turf that cannot absorb or utilize them.",
+      "bestPractice": "Aerate compacted zones annually with a core aerator; long-term organic matter topdressing slowly reverses compaction."
+    },
+    {
+      "id": 96,
+      "category": "soil",
+      "claim": "Earthworms are a sign of healthy, biologically active soil.",
+      "verdict": "hort",
+      "explanation": "Earthworm activity improves soil structure through burrowing, accelerates nutrient cycling, and improves drainage pathways.",
+      "bestPractice": "Avoid pesticides harmful to earthworms; regular organic matter applications encourage healthy earthworm populations."
+    },
+    {
+      "id": 97,
+      "category": "soil",
+      "claim": "Rototilling a lawn area creates ideal seeding conditions.",
+      "verdict": "hoax",
+      "explanation": "Tilling destroys existing soil structure, brings up dormant weed seeds buried for years, and creates a boom-bust compaction cycle.",
+      "bestPractice": "For lawn renovation, use a power rake (verticut), aerator, or topdress with compost rather than tilling."
+    },
+    {
+      "id": 98,
+      "category": "soil",
+      "claim": "A 12-inch hole test can reveal whether soil drains adequately.",
+      "verdict": "hort",
+      "explanation": "Fill a 12-inch hole with water. Well-draining soil absorbs it within 1 hour. Holding it for more than 3 hours indicates drainage problems.",
+      "bestPractice": "Assess drainage before any major lawn renovation; address grading or drainage infrastructure before investing in soil amendments."
+    },
+    {
+      "id": 99,
+      "category": "soil",
+      "claim": "Bulk topsoil sold in bags is always suitable for lawn use.",
+      "verdict": "hoax",
+      "explanation": "Bulk topsoil quality varies widely; it can introduce weed seeds, disease organisms, incompatible pH, or poor structure into your lawn.",
+      "bestPractice": "Test bulk topsoil before use, or use screened, certified compost for topdressing rather than raw bulk topsoil."
+    },
+    {
+      "id": 100,
+      "category": "soil",
+      "claim": "Soil damage from years of neglect can be reversed in a single aggressive treatment season.",
+      "verdict": "hoax",
+      "explanation": "Rebuilding severely compacted, depleted soil takes 3–7 years of consistent management; aggressive shortcuts often backfire.",
+      "bestPractice": "Set realistic expectations and commit to a multi-year renovation plan addressing pH, organic matter, aeration, and overseeding."
+    },
+    {
+      "id": 101,
+      "category": "soil",
+      "claim": "Microbial diversity in soil is directly related to lawn resilience.",
+      "verdict": "hort",
+      "explanation": "A diverse soil microbial ecosystem cycles nutrients, suppresses pathogens, and decomposes organic matter — the foundation of self-sustaining turf.",
+      "bestPractice": "Feed soil organisms with organic matter and avoid broad-spectrum fungicide or pesticide applications unless absolutely necessary."
+    },
+    {
+      "id": 102,
+      "category": "soil",
+      "claim": "Garden lime and agricultural lime are interchangeable for lawn pH adjustment.",
+      "verdict": "hoax",
+      "explanation": "Hydrated (garden) lime reacts much faster and at lower rates can cause turf burn, unlike ground agricultural limestone.",
+      "bestPractice": "Use ground calcitic or dolomitic limestone for safe, gradual pH adjustment; never exceed 50 lbs/1000 sq ft per application."
+    },
+    {
+      "id": 103,
+      "category": "soil",
+      "claim": "Surface drainage grading is a prerequisite to any lawn renovation.",
+      "verdict": "hort",
+      "explanation": "Water that pools after rain will undermine every other investment in soil health, seed, and amendments.",
+      "bestPractice": "Ensure the lawn surface drains at a minimum 1–2% slope away from structures before investing in any renovation."
+    },
+    {
+      "id": 104,
+      "category": "soil",
+      "claim": "Topdressing with compost is one of the most cost-effective long-term lawn investments.",
+      "verdict": "hort",
+      "explanation": "Annual compost topdressings progressively raise organic matter, reduce compaction, and improve soil biology over 3–5 years.",
+      "bestPractice": "Apply ¼ inch of fine compost after aeration and drag or mat it into the canopy for maximum benefit."
+    },
+    {
+      "id": 105,
+      "category": "soil",
+      "claim": "Once soil pH has been corrected with lime, you don't need to retest.",
+      "verdict": "hoax",
+      "explanation": "pH drifts continuously due to rainfall, fertilizer acidification, root activity, and organic matter decomposition.",
+      "bestPractice": "Retest pH every 2–3 years; high-rainfall climates or heavy fertilizer programs may warrant annual monitoring."
+    },
+    {
+      "id": 106,
+      "category": "thatch",
+      "claim": "Thatch is the layer of organic material between soil and grass blades.",
+      "verdict": "hort",
+      "explanation": "Thatch is a layer of living and dead roots, crowns, and stems. A thin layer of ½ inch or less is actually beneficial, acting as mulch.",
+      "bestPractice": "Monitor thatch depth annually; only take action when it exceeds ¾ inch."
+    },
+    {
+      "id": 107,
+      "category": "thatch",
+      "claim": "Leaving grass clippings on the lawn causes thatch to build up.",
+      "verdict": "hoax",
+      "explanation": "Clippings are 80–85% water and decompose completely within days. Thatch consists of roots, crowns, and stems — not clippings.",
+      "bestPractice": "Mulch-mow freely. Clippings return valuable nutrients and do not contribute to thatch accumulation."
+    },
+    {
+      "id": 108,
+      "category": "thatch",
+      "claim": "Excessive nitrogen fertilization is a primary driver of thatch accumulation.",
+      "verdict": "hort",
+      "explanation": "High nitrogen drives rapid stem and crown tissue growth faster than soil microbes can decompose it, causing layer buildup.",
+      "bestPractice": "Follow soil-test-based nitrogen programs; avoid chronic over-fertilization."
+    },
+    {
+      "id": 109,
+      "category": "thatch",
+      "claim": "Dethatching should be done every year as a routine lawn practice.",
+      "verdict": "hoax",
+      "explanation": "Unnecessary dethatching when thatch is below ¾ inch wounds turf without delivering any benefit.",
+      "bestPractice": "Measure thatch annually. Dethatch only when it exceeds ¾ inch. Skip it entirely if the layer is ½ inch or less."
+    },
+    {
+      "id": 110,
+      "category": "thatch",
+      "claim": "Core aerification promotes faster thatch breakdown by increasing microbial contact.",
+      "verdict": "hort",
+      "explanation": "Soil cores dragged back across the surface inoculate the thatch layer with decomposing microorganisms, accelerating breakdown.",
+      "bestPractice": "Allow aeration cores to break down naturally on the surface to biologically treat the thatch layer below."
+    },
+    {
+      "id": 111,
+      "category": "thatch",
+      "claim": "Thatch is only a problem in warm-season grasses like Bermuda and Zoysia.",
+      "verdict": "hoax",
+      "explanation": "Kentucky bluegrass and creeping bentgrass are among the most thatch-prone cool-season species in common use.",
+      "bestPractice": "Thatch management is relevant for any heavily fertilized lawn regardless of whether it's cool-season or warm-season."
+    },
+    {
+      "id": 112,
+      "category": "thatch",
+      "claim": "A ¾-inch or greater thatch layer inhibits water, air, and pesticide penetration.",
+      "verdict": "hort",
+      "explanation": "Thick thatch causes irrigation to sheet off, drives roots to stay in the thatch layer instead of soil, and prevents pesticides from reaching their targets.",
+      "bestPractice": "Measure thatch depth with a plug sample or folded ruler; initiate action when threshold ¾ inch is reached."
+    },
+    {
+      "id": 113,
+      "category": "thatch",
+      "claim": "Applying compost topdress can help biologically decompose mild thatch over time.",
+      "verdict": "hort",
+      "explanation": "Compost introduces organic-matter-decomposing microorganisms that colonize and work on the existing thatch layer.",
+      "bestPractice": "Combine aeration with a ¼-inch compost topdress for a biological thatch management approach."
+    },
+    {
+      "id": 114,
+      "category": "thatch",
+      "claim": "A single aggressive spring dethatching session fully resets a lawn without lasting harm.",
+      "verdict": "hoax",
+      "explanation": "Aggressive dethatching in spring strips turf and leaves it vulnerable to weeds, heat stress, and disease during the most competitive season.",
+      "bestPractice": "Dethatch cool-season turf in early fall when recovery is rapid; avoid heavy spring mechanical dethatching."
+    },
+    {
+      "id": 115,
+      "category": "thatch",
+      "claim": "Grass species with rhizomes and stolons naturally produce more thatch than bunch-type grasses.",
+      "verdict": "hort",
+      "explanation": "Creeping grasses generate more stems, crowns, and below-ground biomass per unit area, leading to faster thatch accumulation.",
+      "bestPractice": "Factor grass species into your thatch monitoring frequency; creeping species should be checked more often."
+    },
+    {
+      "id": 116,
+      "category": "thatch",
+      "claim": "Dethatching, aeration, and vertical mowing are all the same practice with different names.",
+      "verdict": "hoax",
+      "explanation": "Dethatching mechanically removes thatch, verticutting slices through it to allow decomposition, and aeration relieves compaction and improves microbial contact.",
+      "bestPractice": "Diagnose the actual problem before choosing a machine: plug removal for compaction, vertical slicing for thick thatch."
+    },
+    {
+      "id": 117,
+      "category": "thatch",
+      "claim": "Broadleaf pesticides that kill soil microbes accelerate thatch buildup.",
+      "verdict": "hort",
+      "explanation": "Healthy soil microbial populations naturally decompose thatch. Suppressing them with biocides allows thatch to accumulate faster.",
+      "bestPractice": "Use targeted pest controls to minimize impact on soil biology; avoid broad-application biocides when possible."
+    },
+    {
+      "id": 118,
+      "category": "thatch",
+      "claim": "A thin thatch layer below ½ inch insulates roots from temperature extremes.",
+      "verdict": "hort",
+      "explanation": "A thin thatch layer buffers soil from freeze–thaw cycles and summer surface heat, acting as a natural thermal blanket.",
+      "bestPractice": "Aim to maintain a ¼–½ inch thatch layer as a functional buffer; do not dethatch all the way down to bare soil."
+    },
+    {
+      "id": 119,
+      "category": "thatch",
+      "claim": "Power rakes can be safely set to the most aggressive setting from the start.",
+      "verdict": "hoax",
+      "explanation": "Power rakes set too aggressively can scalp turf down to bare soil within seconds, causing severe setback.",
+      "bestPractice": "Start with the tines at the highest (most gentle) setting, make a test pass, and carefully adjust depth downward."
+    },
+    {
+      "id": 120,
+      "category": "thatch",
+      "claim": "Aerating a thatch-prone lawn more than once per year accelerates decomposition.",
+      "verdict": "hort",
+      "explanation": "Multiple aeration passes per year increase the surface area of soil exposed to thatch microorganisms, speeding natural breakdown.",
+      "bestPractice": "Aerate thatch-prone lawns in both spring and fall for accelerated biological thatch management."
+    },
+    {
+      "id": 121,
+      "category": "weeds",
+      "claim": "The best weed control is a dense, healthy turf canopy.",
+      "verdict": "hort",
+      "explanation": "Thick turf physically shades soil and prevents most weed seed from receiving the light necessary to germinate.",
+      "bestPractice": "Maintain proper mowing height, healthy fertility, and regular overseeding to create dense competitive turf."
+    },
+    {
+      "id": 122,
+      "category": "weeds",
+      "claim": "Pre-emergent herbicides kill actively growing weeds.",
+      "verdict": "hoax",
+      "explanation": "Pre-emergent herbicides prevent seed germination. They have zero effect on weeds that have already emerged and established.",
+      "bestPractice": "Apply pre-emergent before weed seed germination; use post-emergent for weeds that are already growing."
+    },
+    {
+      "id": 123,
+      "category": "weeds",
+      "claim": "Crabgrass control timing is determined by soil temperature, not the calendar date.",
+      "verdict": "hort",
+      "explanation": "Crabgrass germinates when soil temperature reaches 50–55°F at 2-inch depth consistently — regardless of what month that falls in.",
+      "bestPractice": "Apply pre-emergent when forsythia blooms locally, or monitor soil temperature directly with a probe."
+    },
+    {
+      "id": 124,
+      "category": "weeds",
+      "claim": "Household vinegar is an effective substitute for broadleaf herbicides on lawns.",
+      "verdict": "hoax",
+      "explanation": "Household vinegar (5% acetic acid) only burns the top of plants, leaving roots intact and allowing rapid regrowth.",
+      "bestPractice": "Use triclopyr or 2,4-D-based broadleaf herbicides for effective, systemic broadleaf weed control."
+    },
+    {
+      "id": 125,
+      "category": "weeds",
+      "claim": "Post-emergent broadleaf herbicides work best when applied to actively growing weeds.",
+      "verdict": "hort",
+      "explanation": "Systemic herbicides penetrate and translocate through leaves most effectively during active photosynthesis. Cold or drought-stressed weeds resist uptake.",
+      "bestPractice": "Apply broadleaf herbicide when temperatures are 60–85°F and weeds are clearly growing actively."
+    },
+    {
+      "id": 126,
+      "category": "weeds",
+      "claim": "Nutsedge (nutgrass) can be controlled with standard broadleaf herbicides.",
+      "verdict": "hoax",
+      "explanation": "Nutsedge is a sedge, not a broadleaf weed or a grass. It is resistant to most standard broadleaf and grass herbicides.",
+      "bestPractice": "Use halosulfuron (Sedgehammer) or sulfentrazone products specifically labeled for nutsedge control."
+    },
+    {
+      "id": 127,
+      "category": "weeds",
+      "claim": "Weed identification is a prerequisite to effective chemical control.",
+      "verdict": "hort",
+      "explanation": "Applying the wrong herbicide class wastes money and delays effective treatment; some misapplications can damage surrounding turf.",
+      "bestPractice": "Classify weeds as broadleaf, grass, or sedge before selecting a herbicide. Use a university extension weed ID guide."
+    },
+    {
+      "id": 128,
+      "category": "weeds",
+      "claim": "One pre-emergent application in early spring provides season-long crabgrass control.",
+      "verdict": "hoax",
+      "explanation": "Most granular pre-emergents provide 6–8 weeks of control. Late-germinating crabgrass escapes a single spring application.",
+      "bestPractice": "Apply a split application — first in early spring, second 6–8 weeks later — or use an extended-release pre-emergent product."
+    },
+    {
+      "id": 129,
+      "category": "weeds",
+      "claim": "White clover in lawns often signals nitrogen deficiency in surrounding soil.",
+      "verdict": "hort",
+      "explanation": "Clover is a nitrogen-fixing legume that thrives specifically in low-nitrogen environments where grasses are struggling.",
+      "bestPractice": "If clover is spreading widely, conduct a soil test. Address nitrogen levels rather than relying only on herbicide."
+    },
+    {
+      "id": 130,
+      "category": "weeds",
+      "claim": "Mowing height has no effect on weed pressure.",
+      "verdict": "hoax",
+      "explanation": "Short-cut turf allows more light to reach the soil surface, directly stimulating broadleaf and annual grass weed seed germination.",
+      "bestPractice": "Raise mowing height to 3–4 inches to competitively suppress weed seed germination through shade."
+    },
+    {
+      "id": 131,
+      "category": "weeds",
+      "claim": "Hand-pulling weeds can permanently remove dandelions.",
+      "verdict": "hort",
+      "explanation": "Dandelion taproots can be fully removed with a proper pull or weeder tool, preventing regrowth — unlike fibrous-rooted weeds.",
+      "bestPractice": "Hand-pull after rain when soil is moist; use a weeder tool that removes the full taproot to prevent resprouting."
+    },
+    {
+      "id": 132,
+      "category": "weeds",
+      "claim": "Boiling water kills lawn weeds without harming surrounding grass.",
+      "verdict": "hoax",
+      "explanation": "Boiling water kills all vegetation it contacts, regardless of species — it doesn't distinguish between weeds and grass.",
+      "bestPractice": "Reserve boiling water for hardscape crack weeds only; keep it away from lawn areas entirely."
+    },
+    {
+      "id": 133,
+      "category": "weeds",
+      "claim": "Corn gluten meal is a reliable pre-emergent weed control for lawns.",
+      "verdict": "hoax",
+      "explanation": "Research shows inconsistent efficacy at practical home-application rates, and improperly timed applications can actually stimulate weed growth.",
+      "bestPractice": "Treat corn gluten meal as a nitrogen source; rely on synthetic or certified organic pre-emergents for reliable prevention."
+    },
+    {
+      "id": 134,
+      "category": "weeds",
+      "claim": "Broadleaf herbicide should be applied immediately after mowing.",
+      "verdict": "hoax",
+      "explanation": "Freshly mowed leaves have insufficient surface area to absorb enough herbicide for systemic translocation to the roots.",
+      "bestPractice": "Wait 2–3 days after mowing before applying broadleaf herbicide; wait another 2–3 days post-application before mowing again."
+    },
+    {
+      "id": 135,
+      "category": "weeds",
+      "claim": "Annual bluegrass (Poa annua) cannot be controlled with standard broadleaf herbicides.",
+      "verdict": "hort",
+      "explanation": "Poa annua is a grass weed, not a broadleaf. Broadleaf herbicides are completely ineffective against it.",
+      "bestPractice": "Use ethofumesate or pronamide labeled for Poa annua. Cultural overseeding with perennial ryegrass also provides competitive suppression."
+    },
+    {
+      "id": 136,
+      "category": "weeds",
+      "claim": "Young, small weeds are easier to control than mature, large weeds.",
+      "verdict": "hort",
+      "explanation": "Weeds at 4–6 leaves are most susceptible to herbicides; large, mature, or seed-set weeds require higher rates and multiple applications.",
+      "bestPractice": "Scout regularly and target young emerging weeds for maximum control efficiency at minimum product cost."
+    },
+    {
+      "id": 137,
+      "category": "weeds",
+      "claim": "Spot treating individual weeds is more cost-effective than broadcast herbicide applications.",
+      "verdict": "hort",
+      "explanation": "Broadcast applications treat areas without weeds, waste product, and increase non-target plant and water exposure unnecessarily.",
+      "bestPractice": "Spot-treat concentrated weed areas with a backpack or handgun sprayer; only broadcast when weed coverage exceeds 50%."
+    },
+    {
+      "id": 138,
+      "category": "weeds",
+      "claim": "Dicamba herbicides are safe to apply near trees and ornamental shrubs.",
+      "verdict": "hoax",
+      "explanation": "Dicamba is highly volatile in warm weather and can cause severe damage to nearby trees and shrubs through vapor drift.",
+      "bestPractice": "Avoid dicamba near woody ornamentals; use triclopyr or 2,4-D products with a buffer zone around landscape plantings."
+    },
+    {
+      "id": 139,
+      "category": "weeds",
+      "claim": "Nitrogen-deficient lawns are more susceptible to weed invasion.",
+      "verdict": "hort",
+      "explanation": "Low-nitrogen turf grows slowly and thinly, opening gaps that opportunistic weed seeds colonize quickly.",
+      "bestPractice": "Maintain balanced fertility based on soil tests to keep turf dense enough to outcompete weeds."
+    },
+    {
+      "id": 140,
+      "category": "weeds",
+      "claim": "Applying more herbicide than the label rate kills weeds faster.",
+      "verdict": "hoax",
+      "explanation": "Overdosing does not accelerate herbicide activity and risks phytotoxicity to surrounding turf, non-target plants, and groundwater.",
+      "bestPractice": "Apply at the labeled rate and re-treat after 14–21 days if regrowth occurs rather than increasing rate."
+    },
+    {
+      "id": 141,
+      "category": "aeration",
+      "claim": "Core aeration is the most impactful single cultural practice for compacted lawns.",
+      "verdict": "hort",
+      "explanation": "Removing soil plugs physically relieves compaction, improves gas exchange, and creates direct pathways for water and nutrients to reach roots.",
+      "bestPractice": "Core aerate at least once per year on high-traffic lawns; twice annually on severely compacted clay soils."
+    },
+    {
+      "id": 142,
+      "category": "aeration",
+      "claim": "Spike aerators are just as effective as core aerators for relieving compaction.",
+      "verdict": "hoax",
+      "explanation": "Spike aerators push soil sideways and downward, actually increasing compaction density around each hole rather than removing it.",
+      "bestPractice": "Use only hollow-tine core aerators to physically remove soil; spike aerators are ineffective and can make compaction worse."
+    },
+    {
+      "id": 143,
+      "category": "aeration",
+      "claim": "Fall is the best time to aerate cool-season lawns.",
+      "verdict": "hort",
+      "explanation": "Fall aeration allows root recovery into open cores before winter with minimal weed seed germination risk from disturbed soil.",
+      "bestPractice": "Aerate cool-season turf in September–October; aerate warm-season turf in late spring (May–June)."
+    },
+    {
+      "id": 144,
+      "category": "aeration",
+      "claim": "Aeration holes should be immediately filled with sand after the process.",
+      "verdict": "hoax",
+      "explanation": "Filling aeration holes inconsistently with raw sand alters soil texture in patchy ways and provides no benefit over natural breakdown.",
+      "bestPractice": "Let cores break down naturally on the surface, or rake in compost topdress. Avoid filling with raw sand."
+    },
+    {
+      "id": 145,
+      "category": "aeration",
+      "claim": "Soil should be moist (not saturated) when core aerating for best results.",
+      "verdict": "hort",
+      "explanation": "Dry soil makes core extraction difficult and reduces hole depth. Saturated soil causes equipment compaction on the surface.",
+      "bestPractice": "Irrigate 24 hours before aerating so cores pull cleanly to a depth of 3–4 inches."
+    },
+    {
+      "id": 146,
+      "category": "aeration",
+      "claim": "You only need to aerate if you can see visible indentations from foot traffic.",
+      "verdict": "hoax",
+      "explanation": "Significant compaction is often invisible at the surface; roots can be severely restricted without any visible surface symptoms.",
+      "bestPractice": "Perform a screwdriver penetration test annually; if it can't easily go 6 inches into the soil, aerate."
+    },
+    {
+      "id": 147,
+      "category": "aeration",
+      "claim": "Making multiple aeration passes at different angles improves results significantly.",
+      "verdict": "hort",
+      "explanation": "Two or three passes at different angles increases the proportion of soil removed from the surface area, improving total compaction relief.",
+      "bestPractice": "Make 2–3 passes for severely compacted soils; two diagonal opposing passes doubles effectiveness over a single pass."
+    },
+    {
+      "id": 148,
+      "category": "aeration",
+      "claim": "Fertilizing and overseeding within 48 hours of aeration creates a synergistic benefit.",
+      "verdict": "hort",
+      "explanation": "Open aeration cores simultaneously absorb seed and fertilizer, maximizing the cost per acre of all three inputs applied together.",
+      "bestPractice": "Plan an integrated annual event: aerate → overseed → fertilize in one coordinated fall service."
+    },
+    {
+      "id": 149,
+      "category": "aeration",
+      "claim": "Liquid aeration products can replace mechanical core aeration.",
+      "verdict": "hoax",
+      "explanation": "Liquid aerators can improve soil aggregation and microbial activity, but they do not physically remove compacted soil plugs.",
+      "bestPractice": "Use liquid aeration as an annual maintenance supplement; rely on mechanical core aeration for primary compaction relief."
+    },
+    {
+      "id": 150,
+      "category": "aeration",
+      "claim": "Aerating during summer heat stress gives grass immediate relief.",
+      "verdict": "hoax",
+      "explanation": "Aeration creates surface wounds on turf; aerating during heat stress can thin and further weaken an already struggling lawn.",
+      "bestPractice": "Time aeration when turf has at least 4–6 weeks of favorable growing conditions ahead for recovery."
+    },
+    {
+      "id": 151,
+      "category": "aeration",
+      "claim": "Heavy clay soils benefit from more frequent aeration than sandy soils.",
+      "verdict": "hort",
+      "explanation": "Clay compacts more readily and aerifies more slowly because of its fine particle structure. Sandy soils rarely require more than one session.",
+      "bestPractice": "Aerate clay lawns in both spring and fall; sandy soils typically only need one annual aeration session."
+    },
+    {
+      "id": 152,
+      "category": "aeration",
+      "claim": "Core aerators are too expensive for homeowners and only practical for professionals.",
+      "verdict": "hoax",
+      "explanation": "Core aerators are available for rent at most home improvement stores and equipment rental centers for $75–$150 per day.",
+      "bestPractice": "Rent a gas-powered core aerator annually for the same performance as professional equipment at a fraction of the cost."
+    },
+    {
+      "id": 153,
+      "category": "aeration",
+      "claim": "Aerating a recently seeded lawn will kill all newly germinating seed.",
+      "verdict": "hoax",
+      "explanation": "Aeration after the turf has been mowed 3+ times minimally disrupts established turf roots; the damage concern applies only to very new seedlings.",
+      "bestPractice": "Aerate established or mature new turf (after 3 mowings); avoid aerating within the first 4–6 weeks of fresh germination."
+    },
+    {
+      "id": 154,
+      "category": "aeration",
+      "claim": "Very deep aeration cores are always better for the lawn.",
+      "verdict": "hoax",
+      "explanation": "Extremely aggressive aeration depths can sever irrigation lines and cause surface disruption that outweighs the benefit.",
+      "bestPractice": "Standard ½-inch x 3-inch cores are adequate for most residential lawns; know your irrigation layout before deep-tining."
+    },
+    {
+      "id": 155,
+      "category": "aeration",
+      "claim": "Overseeding combined with aeration is the most effective method to thicken thin turf.",
+      "verdict": "hort",
+      "explanation": "Aeration creates protected seed-to-soil contact points that dramatically improve germination rates over surface broadcasting alone.",
+      "bestPractice": "Aerate, then immediately overseed and fertilize with a starter product. Drag seeded areas to push seed into open cores."
+    },
+    {
+      "id": 156,
+      "category": "pests",
+      "claim": "Brown patch disease is most active when nights stay above 70°F with high humidity.",
+      "verdict": "hort",
+      "explanation": "Brown patch (Rhizoctonia solani) is triggered specifically by elevated night temperatures combined with extended leaf wetness.",
+      "bestPractice": "Avoid evening irrigation during hot humid periods; apply a preventive fungicide when forecast conditions are met."
+    },
+    {
+      "id": 157,
+      "category": "pests",
+      "claim": "All brown patches in summer indicate grub damage beneath the surface.",
+      "verdict": "hoax",
+      "explanation": "Summer drought stress, fungal disease, chinch bugs, and grubs all create nearly identical brown patches. Grubs must be physically confirmed.",
+      "bestPractice": "Peel back a small section of brown lawn and check the top 2 inches of soil for C-shaped white grub larvae before treating."
+    },
+    {
+      "id": 158,
+      "category": "pests",
+      "claim": "Dollar spot disease can be managed in part through proper nitrogen fertility.",
+      "verdict": "hort",
+      "explanation": "Dollar spot is strongly associated with nitrogen-deficient turf; maintaining adequate nitrogen reduces disease severity measurably.",
+      "bestPractice": "A light application of 0.25 lb N/1000 sq ft can reduce dollar spot pressure and may eliminate the need for a fungicide."
+    },
+    {
+      "id": 159,
+      "category": "pests",
+      "claim": "All soil grub species are harmful to lawns and must be treated immediately.",
+      "verdict": "hoax",
+      "explanation": "Most larval insects in lawn soil are benign or beneficial fauna. Only specific pest species at threshold populations cause damage.",
+      "bestPractice": "Grub damage warrants action only when populations exceed 6–10 per sq ft; confirm species identity before treating."
+    },
+    {
+      "id": 160,
+      "category": "pests",
+      "claim": "Preventive grub control should be applied in June–July, before larvae hatch.",
+      "verdict": "hort",
+      "explanation": "Preventive insecticides (imidacloprid, chlorantraniliprole) are most effective against small, newly hatched larvae feeding near the surface.",
+      "bestPractice": "Apply preventive grub control in June for season-long protection; use curative chemistry (trichlorfon) only for late-season rescue."
+    },
+    {
+      "id": 161,
+      "category": "pests",
+      "claim": "Fungicide applications quickly cure active lawn disease.",
+      "verdict": "hoax",
+      "explanation": "Most lawn fungicides are protectant products — they prevent new infection but do not kill established fungal colonies already present.",
+      "bestPractice": "Identify active disease early; apply fungicides before it spreads to more than 5% of lawn area for maximum protection."
+    },
+    {
+      "id": 162,
+      "category": "pests",
+      "claim": "Beneficial nematodes can provide biological control of Japanese beetle grubs.",
+      "verdict": "hort",
+      "explanation": "Steinernema and Heterorhabditis nematodes parasitize grub larvae when soil temps exceed 60°F and soil moisture is maintained.",
+      "bestPractice": "Apply nematodes in late July–August when grubs are small; keep soil consistently moist for 2 weeks post-application."
+    },
+    {
+      "id": 163,
+      "category": "pests",
+      "claim": "Red thread disease will permanently kill the lawn if not treated with fungicide.",
+      "verdict": "hoax",
+      "explanation": "Red thread weakens turf cosmetically but rarely kills crowns. Recovery occurs naturally with nitrogen and dry conditions.",
+      "bestPractice": "Apply 0.25–0.5 lb N/1000 sq ft to speed recovery from red thread; fungicide is often not cost-justified."
+    },
+    {
+      "id": 164,
+      "category": "pests",
+      "claim": "Pythium blight can spread rapidly along surface water drainage and mower paths.",
+      "verdict": "hort",
+      "explanation": "Pythium spreads via water movement and contaminated equipment, making mower traffic and surface drainage patterns routes of rapid expansion.",
+      "bestPractice": "Avoid mowing diseased areas; improve drainage and reduce irrigation in affected zones; apply fungicide preventively if conditions are met."
+    },
+    {
+      "id": 165,
+      "category": "pests",
+      "claim": "Chinch bugs only affect warm-season grasses in southern states.",
+      "verdict": "hoax",
+      "explanation": "Hairy chinch bugs are a significant pest of fescue and perennial ryegrass in the northern US and Canada — specifically cool-season turf.",
+      "bestPractice": "Check turf at the margins of brown patches in July–August; treatment is warranted at 15–20 bugs per sq ft."
+    },
+    {
+      "id": 166,
+      "category": "pests",
+      "claim": "Fairy ring fungi can be fully eradicated by applying standard lawn fungicides.",
+      "verdict": "hoax",
+      "explanation": "Fairy ring fungi produce hydrophobic mycelium layers that resist most fungicide penetration; chemical control is rarely effective.",
+      "bestPractice": "Aerate the ring zone aggressively, apply a surfactant/wetting agent to break hydrophobic layers, and maintain consistent moisture."
+    },
+    {
+      "id": 167,
+      "category": "pests",
+      "claim": "Fungicide resistance develops when the same product class is used in repeated applications.",
+      "verdict": "hort",
+      "explanation": "Repeated use of the same mode of action selects for resistance rapidly; a product can become ineffective within a single season.",
+      "bestPractice": "Rotate fungicide classes (DMI, strobilurin, SDHI) with each application to prevent resistance development."
+    },
+    {
+      "id": 168,
+      "category": "pests",
+      "claim": "Moles eat grass roots and are best controlled with grub elimination.",
+      "verdict": "hoax",
+      "explanation": "Moles are insectivores that primarily eat earthworms. Grub reduction may reduce mole activity, but moles do not consume grass roots.",
+      "bestPractice": "Confirm the damage is mole tunneling versus grub root damage; control moles with traps or bait stations targeted at the moles themselves."
+    },
+    {
+      "id": 169,
+      "category": "pests",
+      "claim": "Scouting for pests before treating prevents wasted applications and environmental harm.",
+      "verdict": "hort",
+      "explanation": "Most lawn pests are only problematic when populations exceed specific damage thresholds. Low populations rarely warrant chemical intervention.",
+      "bestPractice": "Establish treatment thresholds (8–10 grubs/sq ft, 15–20 chinch bugs/sq ft) and scout consistently before applying any pesticide."
+    },
+    {
+      "id": 170,
+      "category": "pests",
+      "claim": "Wide-spectrum insecticides only kill targeted lawn pests.",
+      "verdict": "hoax",
+      "explanation": "Broad-spectrum insecticides (bifenthrin, carbaryl) harm a wide range of non-target organisms including pollinators, beneficial beetles, and earthworms.",
+      "bestPractice": "Read labels for pollinator and aquatic restrictions; apply only after confirmed identification and only when thresholds are exceeded."
+    },
+    {
+      "id": 171,
+      "category": "pests",
+      "claim": "Necrotic ring spot in Kentucky bluegrass can be reduced by selecting resistant cultivars.",
+      "verdict": "hort",
+      "explanation": "Necrotic ring spot (Ophiosphaerella korrae) is a persistent soil pathogen; resistant bluegrass cultivars dramatically reduce disease recurrence.",
+      "bestPractice": "When renovating NRS-affected lawns, choose resistant cultivars such as 'Award', 'Eagleton', or 'Midnight II'."
+    },
+    {
+      "id": 172,
+      "category": "pests",
+      "claim": "Lawn ants always indicate a serious pest problem requiring treatment.",
+      "verdict": "hoax",
+      "explanation": "Most lawn ant species are harmless or beneficial, aerating soil and preying on other insects.",
+      "bestPractice": "Manage ants only when mound activity creates bare patches or the species is a stinging hazard in high-traffic areas."
+    },
+    {
+      "id": 173,
+      "category": "pests",
+      "claim": "Billbug grub damage in summer is frequently misdiagnosed as drought stress.",
+      "verdict": "hort",
+      "explanation": "Billbug larvae cut stems at soil level, causing tufts to pull out with minimal resistance — the key field diagnostic for billbugs.",
+      "bestPractice": "If patches of turf pull out easily at the crown in summer, examine the crown zone for small whitish C-shaped larvae before treating."
+    },
+    {
+      "id": 174,
+      "category": "pests",
+      "claim": "Watering a lawn during pest presence will rinse insects off the grass.",
+      "verdict": "hoax",
+      "explanation": "Garden hose water pressure is insufficient to control any turf pest and may even encourage disease-favorable moisture conditions.",
+      "bestPractice": "Use targeted insecticides based on confirmed pest identification and population thresholds, not irrigation."
+    },
+    {
+      "id": 175,
+      "category": "pests",
+      "claim": "Integrated Pest Management (IPM) reduces pesticide use without sacrificing lawn quality.",
+      "verdict": "hort",
+      "explanation": "IPM uses scouting thresholds, cultural practices, and targeted chemistry as a system — far more effective than calendar-based spray schedules.",
+      "bestPractice": "Adopt an IPM framework: identify problems with thresholds, apply cultural remedies first, use targeted chemistry only when thresholds are exceeded."
+    },
+    {
+      "id": 176,
+      "category": "equipment",
+      "claim": "A properly calibrated spreader is essential for uniform fertilizer application.",
+      "verdict": "hort",
+      "explanation": "A mis-calibrated spreader creates immediately visible streaks, hot spots, and bare gaps in turf response within days of application.",
+      "bestPractice": "Calibrate your spreader annually using manufacturer settings and perform a product-specific catch test to verify output."
+    },
+    {
+      "id": 177,
+      "category": "equipment",
+      "claim": "Zero-turn mowers create less soil compaction than conventional riding mowers.",
+      "verdict": "hoax",
+      "explanation": "Zero-turn mowers concentrate stress in tight turn zones and their spinning turns can create significant ruts in soft or wet soil.",
+      "bestPractice": "Avoid zero-turn mowing on slopes steeper than 15° and wet soils; vary turn locations to distribute wear."
+    },
+    {
+      "id": 178,
+      "category": "equipment",
+      "claim": "Mower deck height should be verified on a flat surface with a ruler, not estimated.",
+      "verdict": "hort",
+      "explanation": "Most mowers have per-wheel height adjustments that may drift out of alignment from each other, making visual estimates unreliable.",
+      "bestPractice": "Set the mower on a flat surface and measure blade-to-ground height at multiple points after any height adjustment."
+    },
+    {
+      "id": 179,
+      "category": "equipment",
+      "claim": "Storing a gasoline mower with a full fuel tank prevents carburetor damage.",
+      "verdict": "hoax",
+      "explanation": "Fuel left in a carburetor for extended periods oxidizes and varnishes the internal jets, causing hard-starting and run problems.",
+      "bestPractice": "Run the mower dry before storage or add fuel stabilizer; drain the float bowl when storing for winter."
+    },
+    {
+      "id": 180,
+      "category": "equipment",
+      "claim": "Regularly cleaning the underside of a mower deck improves longevity and reduces disease spread.",
+      "verdict": "hort",
+      "explanation": "Organic debris underneath holds moisture that accelerates rusting and harbors fungal spores that spread to healthy turf.",
+      "bestPractice": "Scrape and rinse the underside after each use; apply a light silicone spray to prevent grass from sticking."
+    },
+    {
+      "id": 181,
+      "category": "equipment",
+      "claim": "Blade balancing is unnecessary for occasional homeowner-level mowing.",
+      "verdict": "hoax",
+      "explanation": "Unbalanced blades create vibration that damages spindle bearings and the mower deck over time, and produces visibly uneven cuts.",
+      "bestPractice": "Balance blades each time they are sharpened using a blade balancer cone; replace blades that cannot be balanced."
+    },
+    {
+      "id": 182,
+      "category": "equipment",
+      "claim": "Operating a mower exceeding 85 dB without hearing protection causes cumulative hearing damage.",
+      "verdict": "hort",
+      "explanation": "Most residential and commercial mowers produce 85–100 dB, which causes measurable hearing damage with repeated multi-hour exposures.",
+      "bestPractice": "Always wear 25+ NRR hearing protection when operating a mower for more than 30 continuous minutes."
+    },
+    {
+      "id": 183,
+      "category": "equipment",
+      "claim": "Walk-behind mowers are only practical for lawns under half an acre.",
+      "verdict": "hoax",
+      "explanation": "Wide-deck walk-behind commercial mowers (30–36 inch decks) are used professionally on multiple acres of turf daily.",
+      "bestPractice": "Choose mower type based on terrain, slope, and access constraints, not just acreage alone."
+    },
+    {
+      "id": 184,
+      "category": "equipment",
+      "claim": "Robotic mowers maintain more consistent turf height than once-weekly conventional mowing.",
+      "verdict": "hort",
+      "explanation": "Daily light passes keep grass at a constant height with no opportunities for growth surges between intervals.",
+      "bestPractice": "Program robotic mowers to avoid wet conditions; adjust height seasonally to follow recommended species ranges."
+    },
+    {
+      "id": 185,
+      "category": "equipment",
+      "claim": "String trimmers and lawn edgers are interchangeable tools.",
+      "verdict": "hoax",
+      "explanation": "String trimmers cut at turf level or above; dedicated lawn edgers create clean vertical cuts along hardscape for defined edges.",
+      "bestPractice": "Use a dedicated edger for border cuts along walks and beds; use a string trimmer for detail trimming around obstacles."
+    },
+    {
+      "id": 186,
+      "category": "general",
+      "claim": "Grass goes dormant as a survival mechanism, not as a sign of death.",
+      "verdict": "hort",
+      "explanation": "Dormancy is a natural response to drought or cold in which grass conserves resources by halting leaf growth while protecting crowns and roots.",
+      "bestPractice": "Tug the turf gently to distinguish dormancy from death: dormant grass resists pulling; dead grass releases from the soil."
+    },
+    {
+      "id": 187,
+      "category": "general",
+      "claim": "All foot traffic should be avoided when a lawn is dormant.",
+      "verdict": "hoax",
+      "explanation": "Light foot traffic on dormant (but not frozen) turf does not permanently harm it. The restriction applies to frozen or frost-covered grass.",
+      "bestPractice": "Avoid walking on frost-covered or frozen turf (cell wall ice crystal damage); dormant but unfrozen grass tolerates light traffic."
+    },
+    {
+      "id": 188,
+      "category": "general",
+      "claim": "Late summer is the preferred renovation timing because weed competition is lower than spring.",
+      "verdict": "hort",
+      "explanation": "Summer annual weeds begin dying back in late summer, making it the least competitive seeding window for cool-season renovations.",
+      "bestPractice": "Plan seeding and renovation work for late August–September in most northern climates; spring seeding faces intense weed competition."
+    },
+    {
+      "id": 189,
+      "category": "general",
+      "claim": "Once established, a lawn requires no seasonal adjustments to maintain quality.",
+      "verdict": "hoax",
+      "explanation": "Grass requirements shift significantly with temperature, daylight, moisture patterns, and growth stage across the season.",
+      "bestPractice": "Adjust mowing height, watering frequency, and fertilization timing seasonally based on observed growth patterns."
+    },
+    {
+      "id": 190,
+      "category": "general",
+      "claim": "Regular weekly lawn scouting is the most effective early warning system for pests and disease.",
+      "verdict": "hort",
+      "explanation": "Most pest, disease, and cultural problems are easiest and cheapest to address when identified at the earliest stage.",
+      "bestPractice": "Walk the lawn weekly during the growing season; investigate any color or texture change before assuming routine care will resolve it."
+    },
+    {
+      "id": 191,
+      "category": "general",
+      "claim": "Lawn care products labeled 'all natural' are automatically safe for pets and wildlife.",
+      "verdict": "hoax",
+      "explanation": "'Natural' does not mean non-toxic. Iron sulfate, copper sulfate, and many botanical herbicides are potentially toxic to pets and aquatic life.",
+      "bestPractice": "Read the label regardless of marketing language; follow re-entry interval instructions for pets and children on every product."
+    },
+    {
+      "id": 192,
+      "category": "general",
+      "claim": "A healthy lawn sequesters carbon and produces oxygen, delivering measurable environmental benefits.",
+      "verdict": "hort",
+      "explanation": "Actively photosynthesizing turfgrass stores carbon in root biomass and soil organic matter while producing oxygen as a byproduct.",
+      "bestPractice": "Maintain dense, healthy turf coverage as a landscape sustainability strategy. Avoid unnecessary bare soil areas."
+    },
+    {
+      "id": 193,
+      "category": "general",
+      "claim": "Grass color alone is a reliable indicator of soil fertility.",
+      "verdict": "hoax",
+      "explanation": "Grass color is influenced by nitrogen level, iron status, moisture, disease, and grass variety — not soil fertility as a single factor.",
+      "bestPractice": "Use a combined soil test and visual scouting approach to diagnose turf issues; never rely on color alone."
+    },
+    {
+      "id": 194,
+      "category": "general",
+      "claim": "A perfectly uniform monoculture lawn is always the ideal goal in lawn management.",
+      "verdict": "hoax",
+      "explanation": "Ecologically diverse, lower-input lawns provide real ecosystem value — supporting pollinators, retaining water, and storing carbon — with less resource use.",
+      "bestPractice": "Set realistic standards. A vibrant, healthy, mostly-uniform lawn that functions ecologically is a better goal than a pesticide-dependent monoculture."
+    },
+    {
+      "id": 195,
+      "category": "general",
+      "claim": "Lawn renovation in the same spot repeatedly without addressing root causes will always fail.",
+      "verdict": "hort",
+      "explanation": "Seeding, sodding, or plugging a failing area without fixing compaction, drainage, shade, pH, or pest pressure leads to repeated failures.",
+      "bestPractice": "Diagnose and fix the underlying limiting factor before investing in any renovation seed, sod, or amendment."
+    },
+    {
+      "id": 196,
+      "category": "general",
+      "claim": "A lawn can fully recover from summer dormancy without any intervention.",
+      "verdict": "hort",
+      "explanation": "Well-established healthy turf typically resumes growth when fall rains arrive or irrigation is restored, requiring no reseeding.",
+      "bestPractice": "Resume normal irrigation at summer's end and apply a fall fertilizer to support recovery. Only reseed areas where crowns have died."
+    },
+    {
+      "id": 197,
+      "category": "general",
+      "claim": "Children and pets can re-enter the lawn immediately after pesticide application.",
+      "verdict": "hoax",
+      "explanation": "All pesticide labels specify re-entry intervals that must be observed to protect human and animal health.",
+      "bestPractice": "Read and follow the re-entry interval on every pesticide label; keep children and pets off treated areas until the stated interval has passed."
+    },
+    {
+      "id": 198,
+      "category": "general",
+      "claim": "Measuring and recording your lawn's square footage is the foundation of accurate product application.",
+      "verdict": "hort",
+      "explanation": "Every fertilizer, herbicide, and seed product is calibrated to a per-1000-sq-ft rate. Inaccurate area estimates directly cause under- or over-application.",
+      "bestPractice": "Measure your lawn area accurately and keep the figure on record; use it for every product application you make."
+    },
+    {
+      "id": 199,
+      "category": "general",
+      "claim": "Waiting for visible stress symptoms is better than following a proactive lawn care calendar.",
+      "verdict": "hoax",
+      "explanation": "By the time stress symptoms are visible, the lawn has already been suffering and requires more intensive remediation than a proactive schedule would have prevented.",
+      "bestPractice": "Follow a season-aware maintenance calendar for mowing, watering, fertilizing, and scouting. Proactive care is always less costly than reactive repair."
+    },
+    {
+      "id": 200,
+      "category": "general",
+      "claim": "Understanding your specific grass species and local climate is the single most valuable knowledge in lawn care.",
+      "verdict": "hort",
+      "explanation": "Generic lawn advice frequently conflicts with species-specific needs. A program tailored to your grass and region outperforms any universal approach.",
+      "bestPractice": "Identify your grass species, request a local cooperative extension lawn care calendar, and follow recommendations built for your region."
+    }
+  ]
+}
