@@ -192,6 +192,9 @@ export function renderTimeline() {
   const selectedDay = state.timeline.days.find((day) => day.date === selectedTimelineDate) || null;
   const selectedItems = state.timeline.items.filter((item) => item.date === selectedTimelineDate);
 
+  refs.timelineDays.classList.toggle("is-week", state.timeline.range === "week");
+  refs.timelineDays.classList.toggle("is-month", state.timeline.range === "month");
+
   refs.timelineDays.replaceChildren();
   state.timeline.days.forEach((day) => {
     const button = document.createElement("button");
